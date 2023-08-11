@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import BaseButton from "./BaseButton";
-import Logo from "./Logo";
+import BaseButton from "@/components/shared/BaseButton";
+import BaseLogo from "@/components/shared/BaseLogo";
 
 const Header = () => {
   return (
     <header className="p-3 flex justify-between items-center">
       <Link to="/">
-        <Logo size={50} />
+        <BaseLogo size={50} />
       </Link>
       <div>
         <BaseButton isBorderless>

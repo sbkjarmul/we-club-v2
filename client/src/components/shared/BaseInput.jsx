@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const BaseInput = ({ register, errors, name, label, placeholder }) => {
   return (
-    <div className="mb-10 relative">
+    <div className="mb-10 relative flex flex-col w-100">
       <label htmlFor={name} className="text-white text-sm mb-2 ">
         {label}
       </label>

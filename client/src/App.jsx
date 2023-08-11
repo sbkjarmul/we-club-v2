@@ -6,9 +6,9 @@ import Header from "./components/Header";
 
 function App() {
   return (
-    <div className="h-full">
+    <div className="h-full grid grid-rows-[75px_auto]">
       <Header />
-      <div className="p-4">
+      <div className="p-4 row-span-5">
         <Routes>
           <Route path="/" element={<Chat />} />
           <Route path="/login" element={<Login />} />

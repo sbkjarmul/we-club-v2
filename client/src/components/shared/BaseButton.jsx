@@ -1,13 +1,14 @@
 import PropTypes from "prop-types";
 
-const BaseButton = ({ isOutlined, isBorderless, children }) => {
+const BaseButton = ({ isOutlined, isBorderless, children, type }) => {
   return (
     <button
       className={`
-      p-2 ml-4 uppercase tracking-wide font-thin text-sm bg-teal-500 text-white
+      p-2 uppercase tracking-wide font-thin text-sm bg-teal-500 text-white
       ${isOutlined ? "border border-teal-500 bg-transparent text-teal-500" : ""}
       ${isBorderless ? "bg-transparent border-0 text-teal-500" : ""}
       `}
+      type={type}
     >
       {children}
     </button>
@@ -16,6 +17,7 @@ const BaseButton = ({ isOutlined, isBorderless, children }) => {
 
 BaseButton.propTypes = {
   children: PropTypes.node.isRequired,
+  type: PropTypes.string,
   isOutlined: PropTypes.bool,
   isBorderless: PropTypes.bool,
 };

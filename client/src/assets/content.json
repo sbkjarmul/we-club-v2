@@ -1,0 +1,26 @@
+{
+  "pages": {
+    "register": {
+      "title": "Register",
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "password_confirmation": "Password Confirmation"
+      },
+      "actions": {
+        "register": "Register"
+      }
+    },
+    "login": {
+      "title": "Login",
+      "fields": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "actions": {
+        "login": "Login"
+      }
+    }
+  }
+}
