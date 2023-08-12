@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import BaseInput from "@/components/shared/BaseInput";
-import BaseButton from "@/components/shared/BaseButton";
-import json from "@/assets/content.json";
+import BaseInput from "@/presentation/components/shared/BaseInput";
+import BaseButton from "@/presentation/components/shared/BaseButton";
+import content from "@/presentation/assets/content.json";
 
-const content = json.pages.register;
+const authContent = content.pages.auth;
 
 const Register = () => {
   const {
@@ -20,33 +20,33 @@ const Register = () => {
         <BaseInput
           register={register}
           name="name"
-          label={content.fields.name}
-          errors={errors}
+          label={authContent.fields.name}
+          error={errors.password}
         />
 
         <BaseInput
           register={register}
           name="email"
-          label={content.fields.email}
-          errors={errors}
+          label={authContent.fields.email}
+          error={errors.password}
         />
 
         <BaseInput
           register={register}
           name="password"
-          label={content.fields.password}
-          errors={errors}
+          label={authContent.fields.password}
+          error={errors.password}
         />
 
         <BaseInput
           register={register}
           name="passwordConfirmation"
-          label={content.fields.password_confirmation}
-          errors={errors}
+          label={authContent.fields.password_confirmation}
+          errors={errors.passwordConfirmation}
         />
 
         <BaseButton type="submit" isOutlined>
-          {content.actions.register}
+          {authContent.actions.register}
         </BaseButton>
       </form>
     </div>

@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Chat from "./pages/Chat";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Header from "./components/Header";
+import Chat from "@/presentation/pages/chat/Chat";
+import Login from "@/presentation/pages/auth/Login";
+import Register from "@/presentation/pages/auth/Register";
+import Header from "@/presentation/components/blocks/Header";
 
 function App() {
   return (

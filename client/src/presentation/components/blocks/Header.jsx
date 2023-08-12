@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import BaseButton from "@/components/shared/BaseButton";
-import BaseLogo from "@/components/shared/BaseLogo";
+import BaseButton from "@/presentation/components/shared/BaseButton";
+import BaseLogo from "@/presentation/components/shared/BaseLogo";
 
 const Header = () => {
   return (

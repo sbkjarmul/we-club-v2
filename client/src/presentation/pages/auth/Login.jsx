@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import BaseInput from "@/components/shared/BaseInput";
-import BaseButton from "@/components/shared/BaseButton";
-import json from "@/assets/content.json";
+import BaseInput from "@/presentation/components/shared/BaseInput";
+import BaseButton from "@/presentation/components/shared/BaseButton";
+import content from "@/presentation/assets/content.json";
 
-const content = json.pages.login;
+const authContent = content.pages.auth;
 
 const Login = () => {
   const {
@@ -23,19 +23,19 @@ const Login = () => {
         <BaseInput
           register={register}
           name="email"
-          label={content.fields.email}
-          errors={errors}
+          label={authContent.fields.email}
+          error={errors.email}
         />
 
         <BaseInput
           register={register}
           name="password"
-          label={content.fields.password}
-          errors={errors}
+          label={authContent.fields.password}
+          error={errors.password}
         />
 
         <BaseButton type="submit" isOutlined>
-          {content.actions.login}
+          {authContent.actions.login}
         </BaseButton>
       </form>
     </div>
