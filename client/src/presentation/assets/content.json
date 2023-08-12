@@ -13,6 +13,13 @@
       }
     }
   },
+  "components": {
+    "header": {
+      "login": "Login",
+      "logout": "Logout",
+      "register": "Register"
+    }
+  },
   "errors": {
     "required": "This field is required"
   }

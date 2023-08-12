@@ -5,8 +5,8 @@ const BaseLogo = ({ size }) => {
   return <img src={logo} width={`${size}px`} />;
 };
 
-export default BaseLogo;
-
 BaseLogo.propTypes = {
   size: PropTypes.node.isRequired,
 };
+
+export default BaseLogo;

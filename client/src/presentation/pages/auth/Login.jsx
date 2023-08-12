@@ -1,7 +1,11 @@
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+// Presentation Layer
 import BaseInput from "@/presentation/components/shared/BaseInput";
 import BaseButton from "@/presentation/components/shared/BaseButton";
 import content from "@/presentation/assets/content.json";
+// Application Layer
+import { authActions } from "@/application/slices/auth/auth.slice";
 
 const authContent = content.pages.auth;
 
@@ -9,13 +13,15 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
-  console.log(watch("name"));
+  const dispatch = useDispatch();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    dispatch(authActions.login());
+  };
 
   return (
     <div className="flex justify-center items-center h-full">

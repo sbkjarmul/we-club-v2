@@ -1,7 +1,11 @@
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+// Presentation Layer
 import BaseInput from "@/presentation/components/shared/BaseInput";
 import BaseButton from "@/presentation/components/shared/BaseButton";
 import content from "@/presentation/assets/content.json";
+// Application Layer
+import { register as registerUser } from "@/application";
 
 const authContent = content.pages.auth;
 
@@ -12,7 +16,11 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const dispatch = useDispatch();
+
+  const onSubmit = (data) => {
+    dispatch(registerUser(data));
+  };
 
   return (
     <div className="flex justify-center items-center h-full">
@@ -22,6 +30,7 @@ const Register = () => {
           name="name"
           label={authContent.fields.name}
           error={errors.password}
+          value="Test"
         />
 
         <BaseInput
@@ -29,6 +38,7 @@ const Register = () => {
           name="email"
           label={authContent.fields.email}
           error={errors.password}
+          value="Test@Test"
         />
 
         <BaseInput
@@ -36,6 +46,7 @@ const Register = () => {
           name="password"
           label={authContent.fields.password}
           error={errors.password}
+          value="Test"
         />
 
         <BaseInput
@@ -43,11 +54,10 @@ const Register = () => {
           name="passwordConfirmation"
           label={authContent.fields.password_confirmation}
           errors={errors.passwordConfirmation}
+          value="Test"
         />
 
-        <BaseButton type="submit" isOutlined>
-          {authContent.actions.register}
-        </BaseButton>
+        <BaseButton type="submit">{authContent.actions.register}</BaseButton>
       </form>
     </div>
   );

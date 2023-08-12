@@ -3,7 +3,14 @@ import content from "@/presentation/assets/content.json";
 
 const errorContent = content.errors;
 
-const BaseInput = ({ register, error = {}, name, label, placeholder }) => {
+const BaseInput = ({
+  register,
+  error = {},
+  name,
+  label,
+  placeholder,
+  value,
+}) => {
   return (
     <div className="mb-10 relative flex flex-col w-100">
       <label htmlFor={name} className="text-white text-sm mb-2 ">
@@ -12,6 +19,7 @@ const BaseInput = ({ register, error = {}, name, label, placeholder }) => {
 
       <input
         {...register(name, { required: true })}
+        value={value}
         placeholder={placeholder}
         className="w-full bg-cyan-900 py-2 px-3 focus:outline-none "
       />
@@ -31,6 +39,7 @@ BaseInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
   placeholder: PropTypes.string,
+  value: PropTypes.string,
 };
 
 export default BaseInput;

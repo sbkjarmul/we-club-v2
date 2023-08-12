@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const API_URL = "http://localhost:3000/api";
+
 const axiosClient = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: API_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -16,6 +18,7 @@ class httpClient {
       return parseAxiosError(error);
     }
   }
+
   async post(url, data) {
     try {
       const response = await axiosClient.post(url, data);
@@ -24,6 +27,7 @@ class httpClient {
       return parseAxiosError(error);
     }
   }
+
   async patch(url, data) {
     try {
       const response = await axiosClient.patch(url, data);
@@ -32,6 +36,7 @@ class httpClient {
       return parseAxiosError(error);
     }
   }
+
   async delete(url) {
     try {
       const response = await axiosClient.delete(url);
@@ -44,7 +49,7 @@ class httpClient {
 
 function parseAxiosError(error) {
   return {
-    status: error.response.status,
+    status: !error.response ? 500 : error.response.status,
     message: error.message,
   };
 }
