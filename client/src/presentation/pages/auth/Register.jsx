@@ -5,7 +5,7 @@ import BaseInput from "@/presentation/components/shared/BaseInput";
 import BaseButton from "@/presentation/components/shared/BaseButton";
 import content from "@/presentation/assets/content.json";
 // Application Layer
-import { register as registerUser } from "@/application";
+import { registerUser } from "@/application";
 
 const authContent = content.pages.auth;
 
