@@ -4,9 +4,10 @@ const BaseButton = ({ isOutlined, isBorderless, children, type }) => {
   return (
     <button
       className={`
-      p-2 uppercase tracking-wide font-thin text-sm bg-teal-500 text-white
-      ${isOutlined ? "border border-teal-500 bg-transparent text-teal-500" : ""}
-      ${isBorderless ? "bg-transparent border-0 text-teal-500" : ""}
+      p-2 uppercase tracking-wide font-thin text-sm bg-teal-500
+      ${isOutlined && "border border-teal-500 bg-transparent text-teal-500"}
+      ${isBorderless && "bg-transparent border-0 text-teal-500"}
+      ${!isOutlined && !isBorderless && "text-white"}
       `}
       type={type}
     >

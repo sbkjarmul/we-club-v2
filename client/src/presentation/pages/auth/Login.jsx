@@ -34,9 +34,7 @@ const Login = () => {
           error={errors.password}
         />
 
-        <BaseButton type="submit" isOutlined>
-          {authContent.actions.login}
-        </BaseButton>
+        <BaseButton type="submit">{authContent.actions.login}</BaseButton>
       </form>
     </div>
   );
