@@ -21,7 +21,7 @@ const BaseInput = ({
         {...register(name, { required: true })}
         value={value}
         placeholder={placeholder}
-        className="w-full bg-cyan-900 py-2 px-3 focus:outline-none "
+        className="w-full bg-blue-900 py-2 px-3 focus:outline-none"
       />
 
       {error.type === "required" && (

@@ -5,26 +5,30 @@ import {
   registerUserSuccess,
   loginUserSuccess,
   loginUserFailure,
+  setLoader,
 } from "@/application/features/auth/auth.action";
-import { asyncActionWrapper } from "@/application/helpers";
+import { createMiddleware } from "@/application/helpers";
 import { storageService } from "@/infrastructure/services";
 import { logoutUserSuccess } from "./auth.action";
 
-const registerUser = asyncActionWrapper(
+const registerUser = createMiddleware(
   actionTypes.REGISTER_USER,
   async (action, dispatch) => {
+    dispatch(setLoader(true));
     const response = await authApi.register(action.payload);
     if (response.status === 201) {
       dispatch(registerUserSuccess());
     } else {
       dispatch(registerUserFailure());
     }
+    dispatch(setLoader(false));
   }
 );
 
-const loginUser = asyncActionWrapper(
+const loginUser = createMiddleware(
   actionTypes.LOGIN_USER,
   async (action, dispatch) => {
+    dispatch(setLoader(true));
     const response = await authApi.login(action.payload);
     if (response.status === 200) {
       dispatch(loginUserSuccess(response.data));
@@ -33,10 +37,11 @@ const loginUser = asyncActionWrapper(
       dispatch(loginUserFailure());
       storageService.clear("userInfo", response.data);
     }
+    dispatch(setLoader(false));
   }
 );
 
-const logoutUser = asyncActionWrapper(
+const logoutUser = createMiddleware(
   actionTypes.LOGOUT_USER,
   async (action, dispatch) => {
     dispatch(logoutUserSuccess());

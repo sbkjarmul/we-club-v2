@@ -9,8 +9,11 @@
 }
 
 body {
-  @apply h-screen text-teal-500 bg-gradient-to-b from-black via-slate-900 to-slate-900;
+  @apply h-screen text-cyan-500 bg-gradient-to-b from-black via-slate-900 to-slate-900;
   font-family: "Nunito", sans-serif;
+  background-image: url("../assets/images/night.background.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 #root {
@@ -28,8 +31,8 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   -webkit-text-fill-color: rgb(20 184 166);
-  -webkit-box-shadow: 0 0 0px 1000px rgb(22, 78, 99) inset;
-  box-shadow: 0 0 0px 1000px rgb(22, 78, 99) inset;
+  -webkit-box-shadow: 0 0 0px 1000px rgb(30, 58, 138) inset;
+  box-shadow: 0 0 0px 1000px rgb(30, 58, 138) inset;
   transition: background-color 5000s ease-in-out 0s;
   color: white;
 }

@@ -1,6 +1,7 @@
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import BaseButton from "@/presentation/components/shared/BaseButton";
 import BaseLogo from "@/presentation/components/shared/BaseLogo";
 import content from "@/presentation/assets/content.json";
@@ -11,9 +12,9 @@ const headerContent = content.components.header;
 const Header = ({ userInfo }) => {
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     dispatch(logoutUser());
-  };
+  }, [dispatch]);
 
   return (
     <header className="p-3 flex justify-between items-center">

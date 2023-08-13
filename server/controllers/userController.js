@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
+const { sleep } = require("../utils");
 
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.JWT_SECRET, {
@@ -80,6 +81,8 @@ const loginUser = asyncHandler(async (req, res) => {
     res.status(400).json({ message: "Invalid password" });
     throw new Error("Invalid password");
   }
+
+  await sleep(2000);
 
   res.status(200).json({
     _id: user._id,

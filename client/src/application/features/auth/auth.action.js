@@ -7,11 +7,15 @@ export const actionTypes = {
   LOGOUT_USER: "LOGOUT",
   LOGOUT_USER_SUCCESS: "LOGOUT_USER_SUCCESS",
   LOGOUT_USER_FAILURE: "LOGOUT_USER_FAILURE",
-  SET_IS_LOADING: "SET_IS_LOADING",
+  SET_LOADER: "SET_LOADER",
   REGISTER_USER: "REGISTER_USER",
   REGISTER_USER_SUCCESS: "REGISTER_USER_SUCCESS",
   REGISTER_USER_FAILURE: "REGISTER_USER_FAILURE",
 };
+
+export const setLoader = createAction(actionTypes.SET_LOADER, (data) => ({
+  payload: data,
+}));
 export const loginUser = createAction(actionTypes.LOGIN_USER, (data) => ({
   payload: data,
 }));

@@ -1,11 +1,11 @@
-function asyncActionWrapper(actionType, asyncAction) {
+function createMiddleware(actionType, asyncAction, ...args) {
   return (store) => (next) => async (action) => {
     if (action.type === actionType) {
-      await asyncAction(action, store.dispatch);
+      await asyncAction(action, store.dispatch, ...args);
     }
 
     return next(action);
   };
 }
 
-export { asyncActionWrapper };
+export { createMiddleware };

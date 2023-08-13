@@ -5,15 +5,14 @@ import { storageService } from "@/infrastructure/services";
 const userInfo = storageService.read("userInfo");
 
 const initialState = {
-  isLoggedIn: false,
   isLoading: false,
   userInfo: userInfo,
 };
 
 const authReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(actionTypes.REGISTER_USER, (state) => {
-      state.isLoading = true;
+    .addCase(actionTypes.SET_LOADER, (state, action) => {
+      state.isLoading = action.payload;
     })
     .addCase(actionTypes.REGISTER_USER_SUCCESS, (state) => {
       state.isLoading = false;
@@ -21,18 +20,12 @@ const authReducer = createReducer(initialState, (builder) => {
     .addCase(actionTypes.REGISTER_USER_FAILURE, (state) => {
       state.isLoading = false;
     })
-    .addCase(actionTypes.LOGIN_USER, (state) => {
-      state.isLoading = true;
-    })
     .addCase(actionTypes.LOGIN_USER_SUCCESS, (state, action) => {
       state.userInfo = action.payload;
       state.isLoading = false;
     })
     .addCase(actionTypes.LOGIN_USER_FAILURE, (state) => {
       state.isLoading = false;
-    })
-    .addCase(actionTypes.LOGOUT_USER, (state) => {
-      state.isLoading = true;
     })
     .addCase(actionTypes.LOGOUT_USER_SUCCESS, (state) => {
       state.isLoading = false;
