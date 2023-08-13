@@ -1,4 +1,4 @@
-import logo from "@/presentation/assets/images/classic-logo-02.svg";
+import logo from "@/presentation/assets/images/classic.logo.svg";
 import PropTypes from "prop-types";
 
 const BaseLogo = ({ size }) => {

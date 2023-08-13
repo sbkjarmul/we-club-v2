@@ -1,2 +1,2 @@
-export * from "./slices";
+export * from "./features";
 export * from "./store";
