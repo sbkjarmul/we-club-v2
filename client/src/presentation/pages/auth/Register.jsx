@@ -30,7 +30,7 @@ const Register = () => {
           name="name"
           label={authContent.fields.name}
           error={errors.password}
-          value="Test"
+          value="Test2"
         />
 
         <BaseInput
@@ -38,7 +38,7 @@ const Register = () => {
           name="email"
           label={authContent.fields.email}
           error={errors.password}
-          value="Test@Test"
+          value="test22@test.pl"
         />
 
         <BaseInput
@@ -46,7 +46,7 @@ const Register = () => {
           name="password"
           label={authContent.fields.password}
           error={errors.password}
-          value="Test"
+          value="Test123!"
         />
 
         <BaseInput
@@ -54,7 +54,7 @@ const Register = () => {
           name="passwordConfirmation"
           label={authContent.fields.password_confirmation}
           errors={errors.passwordConfirmation}
-          value="Test"
+          value="Test123!"
         />
 
         <BaseButton type="submit">{authContent.actions.register}</BaseButton>

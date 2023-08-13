@@ -5,19 +5,18 @@ class AuthApi {
     this.httpClient = httpClient;
   }
 
-  async login(credentials) {
-    const response = await this.httpClient.post("/auth/login", credentials);
+  async register(data) {
+    const response = await this.httpClient.post("/users/register", data);
     return response;
   }
 
-  async register(credentials) {
-    const response = await this.httpClient.post("/auth/register", credentials);
-    console.log("Register response: ", response);
+  async login(credentials) {
+    const response = await this.httpClient.post("/users/login", credentials);
     return response;
   }
 
   async logout() {
-    const response = await this.httpClient.post("/auth/logout");
+    const response = await this.httpClient.post("/users/logout");
     return response;
   }
 }

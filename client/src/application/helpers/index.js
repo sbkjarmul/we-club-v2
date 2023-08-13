@@ -1,13 +1,11 @@
 function asyncActionWrapper(actionType, asyncAction) {
-  return ({ dispatch }) =>
-    (next) =>
-    async (action) => {
-      if (action.type === actionType) {
-        await asyncAction(action, dispatch);
-      }
+  return (store) => (next) => async (action) => {
+    if (action.type === actionType) {
+      await asyncAction(action, store.dispatch);
+    }
 
-      return next(action);
-    };
+    return next(action);
+  };
 }
 
 export { asyncActionWrapper };

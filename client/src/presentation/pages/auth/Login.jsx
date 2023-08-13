@@ -1,9 +1,11 @@
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 // Presentation Layer
 import BaseInput from "@/presentation/components/shared/BaseInput";
 import BaseButton from "@/presentation/components/shared/BaseButton";
 import content from "@/presentation/assets/content.json";
 // Application Layer
+import { loginUser } from "@/application";
 
 const authContent = content.pages.auth;
 
@@ -14,8 +16,10 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const dispatch = useDispatch();
+
   const onSubmit = (data) => {
-    console.log(data);
+    dispatch(loginUser(data));
   };
 
   return (
@@ -26,6 +30,7 @@ const Login = () => {
           name="email"
           label={authContent.fields.email}
           error={errors.email}
+          value="test22@test.pl"
         />
 
         <BaseInput
@@ -33,6 +38,7 @@ const Login = () => {
           name="password"
           label={authContent.fields.password}
           error={errors.password}
+          value="Test123!"
         />
 
         <BaseButton type="submit">{authContent.actions.login}</BaseButton>

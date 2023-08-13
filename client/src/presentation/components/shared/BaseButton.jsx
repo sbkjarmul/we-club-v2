@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const BaseButton = ({ isOutlined, isBorderless, children, type }) => {
+const BaseButton = ({ isOutlined, isBorderless, children, ...props }) => {
   return (
     <button
       className={`
@@ -9,7 +9,7 @@ const BaseButton = ({ isOutlined, isBorderless, children, type }) => {
       ${isBorderless && "bg-transparent border-0 text-teal-500"}
       ${!isOutlined && !isBorderless && "text-white"}
       `}
-      type={type}
+      {...props}
     >
       {children}
     </button>

@@ -1,10 +1,13 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { actionTypes } from "./auth.action";
+import { storageService } from "@/infrastructure/services";
+
+const userInfo = storageService.read("userInfo");
 
 const initialState = {
   isLoggedIn: false,
   isLoading: false,
-  userInfo: null,
+  userInfo: userInfo,
 };
 
 const authReducer = createReducer(initialState, (builder) => {
@@ -16,6 +19,26 @@ const authReducer = createReducer(initialState, (builder) => {
       state.isLoading = false;
     })
     .addCase(actionTypes.REGISTER_USER_FAILURE, (state) => {
+      state.isLoading = false;
+    })
+    .addCase(actionTypes.LOGIN_USER, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(actionTypes.LOGIN_USER_SUCCESS, (state, action) => {
+      state.userInfo = action.payload;
+      state.isLoading = false;
+    })
+    .addCase(actionTypes.LOGIN_USER_FAILURE, (state) => {
+      state.isLoading = false;
+    })
+    .addCase(actionTypes.LOGOUT_USER, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(actionTypes.LOGOUT_USER_SUCCESS, (state) => {
+      state.isLoading = false;
+      state.userInfo = null;
+    })
+    .addCase(actionTypes.LOGOUT_USER_FAILURE, (state) => {
       state.isLoading = false;
     });
 });
