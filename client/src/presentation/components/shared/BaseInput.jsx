@@ -10,6 +10,7 @@ const BaseInput = ({
   label,
   placeholder,
   value,
+  ...props
 }) => {
   return (
     <div className="mb-10 relative flex flex-col w-100">
@@ -22,6 +23,7 @@ const BaseInput = ({
         value={value}
         placeholder={placeholder}
         className="w-full bg-blue-900 py-2 px-3 focus:outline-none"
+        {...props}
       />
 
       {error.type === "required" && (

@@ -38,6 +38,7 @@ const Register = () => {
           name="email"
           label={authContent.fields.email}
           error={errors.password}
+          type="email"
           value="test22@test.pl"
         />
 
@@ -46,6 +47,7 @@ const Register = () => {
           name="password"
           label={authContent.fields.password}
           error={errors.password}
+          type="password"
           value="Test123!"
         />
 
@@ -54,6 +56,7 @@ const Register = () => {
           name="passwordConfirmation"
           label={authContent.fields.password_confirmation}
           errors={errors.passwordConfirmation}
+          type="password"
           value="Test123!"
         />
 

@@ -30,6 +30,7 @@ const Login = () => {
           name="email"
           label={authContent.fields.email}
           error={errors.email}
+          type="email"
           value="test22@test.pl"
         />
 
@@ -38,6 +39,7 @@ const Login = () => {
           name="password"
           label={authContent.fields.password}
           error={errors.password}
+          type="password"
           value="Test123!"
         />
 
