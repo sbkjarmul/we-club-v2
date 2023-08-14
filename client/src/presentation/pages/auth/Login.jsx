@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 // Presentation Layer
-import BaseInput from "@/presentation/components/shared/BaseInput";
+import FormInput from "@/presentation/components/shared/FormInput";
 import BaseButton from "@/presentation/components/shared/BaseButton";
 import content from "@/presentation/assets/content.json";
 // Application Layer
@@ -25,7 +25,7 @@ const Login = () => {
   return (
     <div className="flex justify-center items-center h-full">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-96">
-        <BaseInput
+        <FormInput
           register={register}
           name="email"
           label={authContent.fields.email}
@@ -34,7 +34,7 @@ const Login = () => {
           value="test22@test.pl"
         />
 
-        <BaseInput
+        <FormInput
           register={register}
           name="password"
           label={authContent.fields.password}
