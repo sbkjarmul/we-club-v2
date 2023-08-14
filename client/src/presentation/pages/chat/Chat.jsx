@@ -1,36 +1,39 @@
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 // Presentation Layer
 import UserChat from "@/presentation/components/chat/UserChat";
-// Application Layer
-import { useDispatch, useSelector } from "react-redux";
+import BaseInput from "@/presentation/components/shared/BaseInput";
 // Application Layer
 import {
   getUserChats,
   getAllUsers,
   createChat,
+  setActiveChat,
 } from "@/application/features/chat/chat.action";
 import { selectUserInfo } from "@/application/features/auth/";
 import {
   selectUserChats,
   selectAllUsers,
   selectIsChatLoading,
+  selectMessages,
 } from "@/application/features/chat/";
-// Presentation Layer
-import BaseInput from "@/presentation/components/shared/BaseInput";
+import { getMessages } from "../../../application/features/chat/chat.action";
 
 const Chat = () => {
   const userInfo = useSelector(selectUserInfo);
   const userChats = useSelector(selectUserChats);
   const allUsers = useSelector(selectAllUsers);
+  const messages = useSelector(selectMessages);
   const isChatsLoading = useSelector(selectIsChatLoading);
   const dispatch = useDispatch();
 
   const handleCreateChat = (recipientId) => {
-    console.log("create chat");
-    console.log("CURRENT USER ID", userInfo._id);
-    console.log("RECIPIENT ID", recipientId);
-    const userId = userInfo._id;
-    dispatch(createChat({ firstId: userId, secondId: recipientId }));
+    dispatch(createChat({ firstId: userInfo._id, secondId: recipientId }));
+  };
+
+  const handleSetActiveChat = (chat) => {
+    dispatch(setActiveChat(chat));
+    dispatch(getMessages(chat._id));
   };
 
   useEffect(() => {
@@ -71,7 +74,7 @@ const Chat = () => {
             <div className="border">
               {isChatsLoading && <div>Loading messages...</div>}
               {userChats.map((chat, index) => (
-                <div key={index}>
+                <div key={index} onClick={() => handleSetActiveChat(chat)}>
                   <UserChat chat={chat} user={userInfo} />
                 </div>
               ))}
@@ -79,8 +82,16 @@ const Chat = () => {
           </div>
 
           <div>
-            MessagexBox
-            <div className="border border-black m-1 h-96"></div>
+            Chatbox
+            <div className="border border-black m-1 h-96">
+              {messages.map((message, index) => (
+                <div key={index} className="bg-green-300 rounded-sm">
+                  <div>{message.text}</div>
+                  <div>{message.createdAt}</div>
+                  <div>{message.senderId}</div>
+                </div>
+              ))}
+            </div>
             <div className="p-1">
               <BaseInput />
             </div>

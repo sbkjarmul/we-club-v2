@@ -8,8 +8,11 @@ import {
   getAllUsersFailure,
   createChatFailure,
   createChatSuccess,
+  getMessagesSuccess,
+  getMessagesFailure,
 } from "@/application/features/chat/chat.action";
 import { createMiddleware } from "@/application/helpers";
+import { setMessagesLoader } from "./chat.action";
 
 const getUserChats = createMiddleware(
   actionTypes.GET_USER_CHATS,
@@ -54,4 +57,18 @@ const createChat = createMiddleware(
   }
 );
 
-export default [getUserChats, getAllUsers, createChat];
+const getMessages = createMiddleware(
+  actionTypes.GET_MESSAGES,
+  async (action, dispatch) => {
+    dispatch(setMessagesLoader(true));
+    const response = await chatApi.getMessages(action.payload);
+    if (response.status === 200) {
+      dispatch(getMessagesSuccess(response.data));
+    } else {
+      dispatch(getMessagesFailure());
+    }
+    dispatch(setMessagesLoader(false));
+  }
+);
+
+export default [getUserChats, getAllUsers, createChat, getMessages];

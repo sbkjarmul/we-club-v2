@@ -13,8 +13,10 @@ export const actionTypes = {
   CREATE_CHAT_SUCCESS: "CREATE_CHAT_SUCCESS",
   CREATE_CHAT_FAILURE: "CREATE_CHAT_FAILURE",
   SET_ACTIVE_CHAT: "SET_ACTIVE_CHAT",
-  SET_ACTIVE_CHAT_SUCCESS: "SET_ACTIVE_CHAT_SUCCESS",
-  SET_ACTIVE_CHAT_FAILURE: "SET_ACTIVE_CHAT_FAILURE",
+  GET_MESSAGES: "GET_MESSAGES",
+  GET_MESSAGES_SUCCESS: "GET_MESSAGES_SUCCESS",
+  GET_MESSAGES_FAILURE: "GET_MESSAGES_FAILURE",
+  SET_MESSAGES_LOADER: "SET_MESSAGES_LOADER",
 };
 
 export const setChatLoader = createActionWithPayload(
@@ -42,9 +44,13 @@ export const createChatFailure = createAction(actionTypes.CREATE_CHAT_FAILURE);
 export const setActiveChat = createActionWithPayload(
   actionTypes.SET_ACTIVE_CHAT
 );
-export const setActiveChatSuccess = createActionWithPayload(
-  actionTypes.SET_ACTIVE_CHAT_SUCCESS
+export const getMessages = createAction(actionTypes.GET_MESSAGES);
+export const getMessagesSuccess = createActionWithPayload(
+  actionTypes.GET_MESSAGES_SUCCESS
 );
-export const setActiveChatFailure = createAction(
-  actionTypes.SET_ACTIVE_CHAT_FAILURE
+export const getMessagesFailure = createAction(
+  actionTypes.GET_MESSAGES_FAILURE
+);
+export const setMessagesLoader = createActionWithPayload(
+  actionTypes.SET_MESSAGES_LOADER
 );
