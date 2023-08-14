@@ -10,4 +10,11 @@ function createMiddleware(actionType, asyncAction, ...args) {
   };
 }
 
-export { createMiddleware };
+function createActionWithPayload(type) {
+  return (data) => ({
+    type: type,
+    payload: data,
+  });
+}
+
+export { createMiddleware, createActionWithPayload };

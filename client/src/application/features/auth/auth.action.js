@@ -1,4 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
+import { createActionWithPayload } from "@/application/helpers";
 
 export const actionTypes = {
   LOGIN_USER: "LOGIN_USER",
@@ -13,27 +14,16 @@ export const actionTypes = {
   REGISTER_USER_FAILURE: "REGISTER_USER_FAILURE",
 };
 
-export const setLoader = createAction(actionTypes.SET_LOADER, (data) => ({
-  payload: data,
-}));
-export const loginUser = createAction(actionTypes.LOGIN_USER, (data) => ({
-  payload: data,
-}));
-export const loginUserSuccess = createAction(
-  actionTypes.LOGIN_USER_SUCCESS,
-  (data) => ({
-    payload: data,
-  })
+export const setLoader = createActionWithPayload(actionTypes.SET_LOADER);
+export const loginUser = createActionWithPayload(actionTypes.LOGIN_USER);
+export const loginUserSuccess = createActionWithPayload(
+  actionTypes.LOGIN_USER_SUCCESS
 );
 export const loginUserFailure = createAction(actionTypes.LOGIN_USER_FAILURE);
-export const logoutUser = createAction(actionTypes.LOGOUT_USER, (data) => ({
-  payload: data,
-}));
+export const logoutUser = createActionWithPayload(actionTypes.LOGOUT_USER);
 export const logoutUserSuccess = createAction(actionTypes.LOGOUT_USER_SUCCESS);
 export const logoutUserFailure = createAction(actionTypes.LOGOUT_USER_FAILURE);
-export const registerUser = createAction(actionTypes.REGISTER_USER, (data) => ({
-  payload: data,
-}));
+export const registerUser = createActionWithPayload(actionTypes.REGISTER_USER);
 export const registerUserSuccess = createAction(
   actionTypes.REGISTER_USER_SUCCESS
 );

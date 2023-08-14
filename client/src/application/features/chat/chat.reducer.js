@@ -4,6 +4,7 @@ import { actionTypes } from "./chat.action";
 const initialState = {
   userChats: [],
   allUsers: [],
+  activeChat: [],
   isChatLoading: false,
   userChatsError: null,
 };
