@@ -19,6 +19,7 @@ const findMessages = asyncHandler(async (req, res) => {
   const chatId = req.params.chatId;
 
   const messages = await Message.find({ chatId });
+  console.log(Array.isArray(messages));
   res.status(200).json(messages);
 });
 
