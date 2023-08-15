@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // Presentation Layer
-import UserChat from "@/presentation/components/chat/UserChat";
-import BaseInput from "@/presentation/components/shared/BaseInput";
+import ChatItem from "@/presentation/components/chat/ChatItem";
+import ChatBox from "../../components/chat/ChatBox";
 // Application Layer
 import {
   getUserChats,
   getAllUsers,
   createChat,
   setActiveChat,
+  getMessages,
+  sendMessage,
 } from "@/application/features/chat/chat.action";
 import { selectUserInfo } from "@/application/features/auth/";
 import {
@@ -16,14 +18,15 @@ import {
   selectAllUsers,
   selectIsChatLoading,
   selectMessages,
+  selectActiveChat,
 } from "@/application/features/chat/";
-import { getMessages } from "../../../application/features/chat/chat.action";
 
 const Chat = () => {
   const userInfo = useSelector(selectUserInfo);
   const userChats = useSelector(selectUserChats);
   const allUsers = useSelector(selectAllUsers);
   const messages = useSelector(selectMessages);
+  const activeChat = useSelector(selectActiveChat);
   const isChatsLoading = useSelector(selectIsChatLoading);
   const dispatch = useDispatch();
 
@@ -34,6 +37,16 @@ const Chat = () => {
   const handleSetActiveChat = (chat) => {
     dispatch(setActiveChat(chat));
     dispatch(getMessages(chat._id));
+  };
+
+  const handleSendMessage = (text) => {
+    const message = {
+      chatId: activeChat._id,
+      senderId: userInfo._id,
+      text,
+    };
+
+    dispatch(sendMessage(message));
   };
 
   useEffect(() => {
@@ -51,10 +64,10 @@ const Chat = () => {
           </div>
         </div>
 
-        <div className="bg-blue-100">
+        <div className="bg-blue-950 grid grid-rows-[100px_1fr_auto]">
           <div>
             Users:
-            <div className="border">
+            <div>
               {allUsers.map((user, index) => (
                 <div
                   key={index}
@@ -71,30 +84,23 @@ const Chat = () => {
 
           <div>
             Chats:
-            <div className="border">
+            <div>
               {isChatsLoading && <div>Loading messages...</div>}
               {userChats.map((chat, index) => (
                 <div key={index} onClick={() => handleSetActiveChat(chat)}>
-                  <UserChat chat={chat} user={userInfo} />
+                  <ChatItem chat={chat} user={userInfo} />
                 </div>
               ))}
             </div>
           </div>
 
           <div>
-            Chatbox
-            <div className="border border-black m-1 h-96">
-              {messages.map((message, index) => (
-                <div key={index} className="bg-green-300 rounded-sm">
-                  <div>{message.text}</div>
-                  <div>{message.createdAt}</div>
-                  <div>{message.senderId}</div>
-                </div>
-              ))}
-            </div>
-            <div className="p-1">
-              <BaseInput />
-            </div>
+            <ChatBox
+              messages={messages}
+              user={userInfo}
+              chat={activeChat}
+              sendMessage={handleSendMessage}
+            />
           </div>
         </div>
       </div>

@@ -54,7 +54,7 @@ const Register = () => {
         <FormInput
           register={register}
           name="passwordConfirmation"
-          label={authContent.fields.password_confirmation}
+          label={authContent.fields.passwordConfirmation}
           errors={errors.passwordConfirmation}
           type="password"
           value="Test123!"

@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import { useFetchRecipient } from "../../hooks/useFetchRecipient";
-import profileImage from "@/presentation/assets/images/profile-default.svg";
+import { useFetchRecipient } from "@/presentation/hooks/useFetchRecipient";
+import ChatAvatar from "./ChatAvatar";
 
-const UserChat = ({ chat, user }) => {
+const ChatItem = ({ chat, user }) => {
   // TODO: rebuild this to dummy component
   const { recipientUser } = useFetchRecipient(chat, user);
   console.log("chat");
@@ -10,16 +10,12 @@ const UserChat = ({ chat, user }) => {
     <div className="bg-blue-500 text-white p-1 border-bottom m-1">
       <div className="flex justify-between">
         <div className="flex">
-          <div className="w-10 flex items-center mr-1">
-            <img
-              src={profileImage}
-              alt="profile"
-              className="p-1 rounded-full border border-black h-10 w-10"
-            />
+          <div className="flex items-center mr-1">
+            <ChatAvatar />
           </div>
           <div>
             <div className="rounded-full bg-green-500 h-3 w-3"></div>
-            {/* <div>{recipientUser?.name}</div> */}
+            <div>{recipientUser?.name}</div>
             <div className="text-xs">Text message</div>
           </div>
         </div>
@@ -32,9 +28,9 @@ const UserChat = ({ chat, user }) => {
   );
 };
 
-UserChat.propTypes = {
+ChatItem.propTypes = {
   chat: PropTypes.object,
   user: PropTypes.object,
 };
 
-export default UserChat;
+export default ChatItem;

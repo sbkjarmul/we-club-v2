@@ -19,6 +19,11 @@ class ChatApi {
     const response = await this.httpClient.get(`/messages/${chatId}`);
     return response;
   }
+
+  async sendMessage(data) {
+    const response = await this.httpClient.post("/messages", data);
+    return response;
+  }
 }
 
 export default new ChatApi(httpClient);

@@ -6,7 +6,7 @@ const initialState = {
   userChatsError: null,
   isChatLoading: false,
   allUsers: [],
-  activeChat: [],
+  activeChat: null,
   messages: [],
   messagesError: null,
   areMessagesLoading: false,
@@ -34,6 +34,9 @@ const chatReducer = createReducer(initialState, (builder) => {
     })
     .addCase(actionTypes.GET_MESSAGES_SUCCESS, (state, action) => {
       state.messages = action.payload;
+    })
+    .addCase(actionTypes.SEND_MESSAGE_SUCCESS, (state, action) => {
+      state.messages = [...state.messages, action.payload];
     });
 });
 

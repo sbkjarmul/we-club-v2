@@ -17,6 +17,9 @@ export const actionTypes = {
   GET_MESSAGES_SUCCESS: "GET_MESSAGES_SUCCESS",
   GET_MESSAGES_FAILURE: "GET_MESSAGES_FAILURE",
   SET_MESSAGES_LOADER: "SET_MESSAGES_LOADER",
+  SEND_MESSAGE: "SEND_MESSAGE",
+  SEND_MESSAGE_SUCCESS: "SEND_MESSAGE_SUCCESS",
+  SEND_MESSAGE_FAILURE: "SEND_MESSAGE_FAILURE",
 };
 
 export const setChatLoader = createActionWithPayload(
@@ -53,4 +56,11 @@ export const getMessagesFailure = createAction(
 );
 export const setMessagesLoader = createActionWithPayload(
   actionTypes.SET_MESSAGES_LOADER
+);
+export const sendMessage = createActionWithPayload(actionTypes.SEND_MESSAGE);
+export const sendMessageSuccess = createActionWithPayload(
+  actionTypes.SEND_MESSAGE_SUCCESS
+);
+export const sendMessageFailure = createAction(
+  actionTypes.SEND_MESSAGE_FAILURE
 );

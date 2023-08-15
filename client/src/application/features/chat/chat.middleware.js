@@ -12,7 +12,11 @@ import {
   getMessagesFailure,
 } from "@/application/features/chat/chat.action";
 import { createMiddleware } from "@/application/helpers";
-import { setMessagesLoader } from "./chat.action";
+import {
+  sendMessageFailure,
+  sendMessageSuccess,
+  setMessagesLoader,
+} from "./chat.action";
 
 const getUserChats = createMiddleware(
   actionTypes.GET_USER_CHATS,
@@ -71,4 +75,24 @@ const getMessages = createMiddleware(
   }
 );
 
-export default [getUserChats, getAllUsers, createChat, getMessages];
+const sendMessage = createMiddleware(
+  actionTypes.SEND_MESSAGE,
+  async (action, dispatch) => {
+    dispatch(setMessagesLoader(true));
+    const response = await chatApi.sendMessage(action.payload);
+    if (response.status === 200) {
+      dispatch(sendMessageSuccess(response.data));
+    } else {
+      dispatch(sendMessageFailure());
+    }
+    dispatch(setMessagesLoader(false));
+  }
+);
+
+export default [
+  getUserChats,
+  getAllUsers,
+  createChat,
+  getMessages,
+  sendMessage,
+];

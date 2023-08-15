@@ -5,11 +5,19 @@
         "name": "Name",
         "email": "Email",
         "password": "Password",
-        "password_confirmation": "Password Confirmation"
+        "passwordConfirmation": "Password Confirmation"
       },
       "actions": {
         "register": "Register",
         "login": "Login"
+      }
+    },
+    "chat": {
+      "message": "Message",
+      "noConversationSelected": "No conversation selected yet...",
+      "loadingChat": "Chat is loading...",
+      "actions": {
+        "send": "Send"
       }
     }
   },
