@@ -20,6 +20,13 @@ export const actionTypes = {
   SEND_MESSAGE: "SEND_MESSAGE",
   SEND_MESSAGE_SUCCESS: "SEND_MESSAGE_SUCCESS",
   SEND_MESSAGE_FAILURE: "SEND_MESSAGE_FAILURE",
+  // SOCKET
+  CONNECT_SOCKET: "CONNECT_SOCKET",
+  CONNECT_SOCKET_SUCCESS: "CONNECT_SOCKET_SUCCESS",
+  DISCONNECT_SOCKET: "DISCONNECT_SOCKET",
+  DISCONNECT_SOCKET_SUCCESS: "DISCONNECT_SOCKET_SUCCESS",
+  LOGIN_TO_CHAT: "LOGIN_TO_CHAT",
+  SET_ONLINE_USERS: "SET_ONLINE_USERS",
 };
 
 export const setChatLoader = createActionWithPayload(
@@ -63,4 +70,17 @@ export const sendMessageSuccess = createActionWithPayload(
 );
 export const sendMessageFailure = createAction(
   actionTypes.SEND_MESSAGE_FAILURE
+);
+// SOCKET
+export const connectSocket = createAction(actionTypes.CONNECT_SOCKET);
+export const connectSocketSuccess = createAction(
+  actionTypes.CONNECT_SOCKET_SUCCESS
+);
+export const disconnectSocket = createAction(actionTypes.DISCONNECT_SOCKET);
+export const disconnectSocketSuccess = createAction(
+  actionTypes.DISCONNECT_SOCKET_SUCCESS
+);
+export const loginToChat = createActionWithPayload(actionTypes.LOGIN_TO_CHAT);
+export const setOnlineUsers = createActionWithPayload(
+  actionTypes.SET_ONLINE_USERS
 );

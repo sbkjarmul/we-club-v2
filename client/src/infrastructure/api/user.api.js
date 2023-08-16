@@ -1,4 +1,4 @@
-import httpClient from "./client";
+import httpClient from "./http.client";
 
 class UserApi {
   constructor(httpClient) {

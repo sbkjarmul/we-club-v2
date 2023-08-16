@@ -31,7 +31,6 @@ const Login = () => {
           label={authContent.fields.email}
           error={errors.email}
           type="email"
-          value="luffy@test.pl"
         />
 
         <FormInput

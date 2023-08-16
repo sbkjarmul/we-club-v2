@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // Presentation Layer
 import ChatItem from "@/presentation/components/chat/ChatItem";
-import ChatBox from "../../components/chat/ChatBox";
+import ChatBox from "@/presentation/components/chat/ChatBox";
+import ChatUsersList from "@/presentation/components/chat/ChatUsersList";
 // Application Layer
 import {
   getUserChats,
@@ -11,24 +12,50 @@ import {
   setActiveChat,
   getMessages,
   sendMessage,
+  connectSocket,
+  disconnectSocket,
 } from "@/application/features/chat/chat.action";
 import { selectUserInfo } from "@/application/features/auth/";
 import {
   selectUserChats,
-  selectAllUsers,
+  selectOtherUsers,
   selectIsChatLoading,
   selectMessages,
   selectActiveChat,
+  selectOnlineUsers,
+  selectIsSockedConnected,
 } from "@/application/features/chat/";
 
 const Chat = () => {
   const userInfo = useSelector(selectUserInfo);
   const userChats = useSelector(selectUserChats);
-  const allUsers = useSelector(selectAllUsers);
+  const otherUsers = useSelector(selectOtherUsers);
   const messages = useSelector(selectMessages);
   const activeChat = useSelector(selectActiveChat);
   const isChatsLoading = useSelector(selectIsChatLoading);
+  const onlineUsers = useSelector(selectOnlineUsers);
+  const isSocketConnected = useSelector(selectIsSockedConnected);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // TODO: create mapper for dtos
+    dispatch(getUserChats(userInfo._id));
+    dispatch(getAllUsers());
+  }, []);
+
+  useEffect(() => {
+    if (isSocketConnected) return;
+    console.log(isSocketConnected);
+    dispatch(connectSocket());
+
+    return () => {
+      dispatch(disconnectSocket());
+    };
+  }, []);
+
+  const isUserOnline = (userId) => {
+    return onlineUsers && onlineUsers.some((user) => user.id === userId);
+  };
 
   const handleCreateChat = (recipientId) => {
     dispatch(createChat({ firstId: userInfo._id, secondId: recipientId }));
@@ -49,12 +76,6 @@ const Chat = () => {
     dispatch(sendMessage(message));
   };
 
-  useEffect(() => {
-    // TODO: create mapper for dtos
-    dispatch(getUserChats(userInfo._id));
-    dispatch(getAllUsers());
-  }, []);
-
   return (
     <>
       <div className="grid grid-cols-3 h-full">
@@ -67,19 +88,11 @@ const Chat = () => {
         <div className="bg-blue-950 grid grid-rows-[100px_1fr_auto]">
           <div>
             Users:
-            <div>
-              {allUsers.map((user, index) => (
-                <div
-                  key={index}
-                  className="inline"
-                  onClick={() => handleCreateChat(user._id)}
-                >
-                  <div className="rounded-full border border-teal-500 w-16 inline-flex justify-center">
-                    {user.name}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <ChatUsersList
+              users={otherUsers}
+              createChat={handleCreateChat}
+              isUserOnline={isUserOnline}
+            />
           </div>
 
           <div>

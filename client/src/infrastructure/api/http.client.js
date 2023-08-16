@@ -9,7 +9,7 @@ const axiosClient = axios.create({
   },
 });
 
-class httpClient {
+class HttpClient {
   async get(url, params = {}) {
     try {
       const response = await axiosClient.get(url, { params });
@@ -54,4 +54,4 @@ function parseAxiosError(error) {
   };
 }
 
-export default new httpClient();
+export default new HttpClient();

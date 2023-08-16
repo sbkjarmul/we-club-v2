@@ -2,6 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 import { actionTypes } from "./chat.action";
 
 const initialState = {
+  socket: null,
   userChats: [],
   userChatsError: null,
   isChatLoading: false,
@@ -10,6 +11,7 @@ const initialState = {
   messages: [],
   messagesError: null,
   areMessagesLoading: false,
+  onlineUsers: [],
 };
 
 const chatReducer = createReducer(initialState, (builder) => {
@@ -37,6 +39,15 @@ const chatReducer = createReducer(initialState, (builder) => {
     })
     .addCase(actionTypes.SEND_MESSAGE_SUCCESS, (state, action) => {
       state.messages = [...state.messages, action.payload];
+    })
+    .addCase(actionTypes.CONNECT_SOCKET_SUCCESS, (state, action) => {
+      state.socket = action.payload;
+    })
+    .addCase(actionTypes.DISCONNECT_SOCKET_SUCCESS, (state) => {
+      state.socket = null;
+    })
+    .addCase(actionTypes.SET_ONLINE_USERS, (state, action) => {
+      state.onlineUsers = action.payload;
     });
 });
 
