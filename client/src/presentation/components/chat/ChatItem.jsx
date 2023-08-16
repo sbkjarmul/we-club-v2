@@ -5,6 +5,7 @@ import ChatAvatar from "./ChatAvatar";
 const ChatItem = ({ chat, user }) => {
   // TODO: rebuild this to dummy component
   const { recipientUser } = useFetchRecipient(chat, user);
+
   console.log("ChatItem render");
   return (
     <div className="bg-blue-500 text-white p-1 border-bottom m-1">

@@ -23,7 +23,6 @@ import {
   selectMessages,
   selectActiveChat,
   selectOnlineUsers,
-  selectIsSockedConnected,
 } from "@/application/features/chat/";
 
 const Chat = () => {
@@ -34,7 +33,6 @@ const Chat = () => {
   const activeChat = useSelector(selectActiveChat);
   const isChatsLoading = useSelector(selectIsChatLoading);
   const onlineUsers = useSelector(selectOnlineUsers);
-  const isSocketConnected = useSelector(selectIsSockedConnected);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,8 +42,6 @@ const Chat = () => {
   }, []);
 
   useEffect(() => {
-    if (isSocketConnected) return;
-    console.log(isSocketConnected);
     dispatch(connectSocket());
 
     return () => {

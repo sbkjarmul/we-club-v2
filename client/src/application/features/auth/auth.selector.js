@@ -1,1 +1,8 @@
-export const selectUserInfo = (state) => state.auth.userInfo;
+import { createSelector } from "@reduxjs/toolkit";
+
+const selectAuth = (state) => state.auth;
+
+export const selectUserInfo = createSelector(
+  selectAuth,
+  (auth) => auth.userInfo
+);
