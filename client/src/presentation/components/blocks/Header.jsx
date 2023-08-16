@@ -22,6 +22,10 @@ const Header = ({ userInfo }) => {
         <BaseLogo size={50} />
       </Link>
 
+      <div>
+        Logged: <span className="text-white">{userInfo?.name}</span>
+      </div>
+
       <>
         {userInfo && (
           <BaseButton isBorderless onClick={handleLogout}>

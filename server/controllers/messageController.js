@@ -2,11 +2,11 @@ const Message = require("../models/messageModel");
 const asyncHandler = require("express-async-handler");
 
 const createMessage = asyncHandler(async (req, res) => {
-  const { chatId, sender, text } = req.body;
+  const { chatId, senderId, text } = req.body;
 
   const message = new Message({
     chatId,
-    sender,
+    senderId,
     text,
   });
 
@@ -19,7 +19,6 @@ const findMessages = asyncHandler(async (req, res) => {
   const chatId = req.params.chatId;
 
   const messages = await Message.find({ chatId });
-  console.log(Array.isArray(messages));
   res.status(200).json(messages);
 });
 

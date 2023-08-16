@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import ChatAvatar from "./ChatAvatar";
 
 const ChatMessage = ({ message, userId }) => {
-  const isUserSender = (message) => message.senderId === userId;
+  const isUserSender = message.senderId === userId;
+
   const getHour = (date) => moment(date).format("HH:mm");
 
   return (
