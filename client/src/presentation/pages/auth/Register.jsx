@@ -30,7 +30,6 @@ const Register = () => {
           name="name"
           label={authContent.fields.name}
           error={errors.password}
-          // value="Test2"
         />
 
         <FormInput
@@ -39,7 +38,6 @@ const Register = () => {
           label={authContent.fields.email}
           error={errors.password}
           type="email"
-          // value="test22@test.pl"
         />
 
         <FormInput
