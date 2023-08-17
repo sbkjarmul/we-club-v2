@@ -27,6 +27,7 @@ export const actionTypes = {
   DISCONNECT_SOCKET_SUCCESS: "DISCONNECT_SOCKET_SUCCESS",
   LOGIN_TO_CHAT: "LOGIN_TO_CHAT",
   SET_ONLINE_USERS: "SET_ONLINE_USERS",
+  ADD_MESSAGE: "ADD_MESSAGE",
 };
 
 export const setChatLoader = createActionWithPayload(
@@ -84,3 +85,4 @@ export const loginToChat = createActionWithPayload(actionTypes.LOGIN_TO_CHAT);
 export const setOnlineUsers = createActionWithPayload(
   actionTypes.SET_ONLINE_USERS
 );
+export const addMessage = createActionWithPayload(actionTypes.ADD_MESSAGE);

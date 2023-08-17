@@ -1,11 +1,10 @@
 import PropTypes from "prop-types";
-import { useFetchRecipient } from "@/presentation/hooks/useFetchRecipient";
+import { useRecipient } from "@/presentation/hooks/useRecipient";
 import ChatAvatar from "./ChatAvatar";
 
-const ChatItem = ({ chat, user }) => {
-  // TODO: rebuild this to dummy component
-  const { recipientUser } = useFetchRecipient(chat, user);
-
+// TODO: rebuild dummy component
+const ChatItem = ({ chat, currentUserId, isUserOnline }) => {
+  const { recipientUser } = useRecipient(chat, currentUserId);
   console.log("ChatItem render");
   return (
     <div className="bg-blue-500 text-white p-1 border-bottom m-1">
@@ -15,7 +14,9 @@ const ChatItem = ({ chat, user }) => {
             <ChatAvatar />
           </div>
           <div>
-            <div className="rounded-full bg-green-500 h-3 w-3"></div>
+            {isUserOnline(recipientUser?._id) && (
+              <div className="inline-block rounded-full bg-green-500 h-3 w-3" />
+            )}
             <div>{recipientUser?.name}</div>
             <div className="text-xs">Text message</div>
           </div>
@@ -31,7 +32,8 @@ const ChatItem = ({ chat, user }) => {
 
 ChatItem.propTypes = {
   chat: PropTypes.object,
-  user: PropTypes.object,
+  currentUserId: PropTypes.string,
+  isUserOnline: PropTypes.func,
 };
 
 export default ChatItem;

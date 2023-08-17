@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // Presentation Layer
-import ChatItem from "@/presentation/components/chat/ChatItem";
 import ChatBox from "@/presentation/components/chat/ChatBox";
 import ChatUsersList from "@/presentation/components/chat/ChatUsersList";
+import ChatItemList from "@/presentation/components/chat/ChatItemList";
 // Application Layer
 import {
   getUserChats,
@@ -23,7 +23,7 @@ import {
   selectMessages,
   selectActiveChat,
   selectOnlineUsers,
-} from "@/application/features/chat/";
+} from "@/application/features/chat";
 
 const Chat = () => {
   const userInfo = useSelector(selectUserInfo);
@@ -35,6 +35,8 @@ const Chat = () => {
   const onlineUsers = useSelector(selectOnlineUsers);
   const dispatch = useDispatch();
 
+  console.log("Chat render");
+
   useEffect(() => {
     // TODO: create mapper for dtos
     dispatch(getUserChats(userInfo._id));
@@ -42,18 +44,21 @@ const Chat = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(connectSocket());
+    dispatch(connectSocket(userInfo._id));
 
     return () => {
       dispatch(disconnectSocket());
     };
   }, []);
 
-  const isUserOnline = (userId) => {
-    return onlineUsers && onlineUsers.some((user) => user.id === userId);
-  };
+  const isUserOnline = (userId) =>
+    onlineUsers && onlineUsers.some((user) => user.id === userId);
+
+  const isChatExists = (recipientId) =>
+    userChats && userChats.some((chat) => chat.members.includes(recipientId));
 
   const handleCreateChat = (recipientId) => {
+    if (isChatExists(recipientId)) return;
     dispatch(createChat({ firstId: userInfo._id, secondId: recipientId }));
   };
 
@@ -62,10 +67,11 @@ const Chat = () => {
     dispatch(getMessages(chat._id));
   };
 
-  const handleSendMessage = (text) => {
+  const handleSendMessage = (text, recipientId) => {
     const message = {
       chatId: activeChat._id,
       senderId: userInfo._id,
+      to: recipientId,
       text,
     };
 
@@ -81,9 +87,9 @@ const Chat = () => {
           </div>
         </div>
 
-        <div className="bg-blue-950 grid grid-rows-[100px_1fr_auto]">
-          <div>
-            Users:
+        <div className="bg-blue-950 grid grid-rows-[100px_1fr_auto] p-3">
+          <div className="p-3 bg-blue-900 rounded-lg overflow-y-auto">
+            <span className="text-blue-200">Users:</span>
             <ChatUsersList
               users={otherUsers}
               createChat={handleCreateChat}
@@ -91,22 +97,21 @@ const Chat = () => {
             />
           </div>
 
-          <div>
+          <di className="my-3 p-3 bg-blue-900 rounded-lg overflow-y-auto">
             Chats:
-            <div>
-              {isChatsLoading && <div>Loading messages...</div>}
-              {userChats.map((chat, index) => (
-                <div key={index} onClick={() => handleSetActiveChat(chat)}>
-                  <ChatItem chat={chat} user={userInfo} />
-                </div>
-              ))}
-            </div>
-          </div>
+            <ChatItemList
+              currentUserId={userInfo._id}
+              chats={userChats}
+              isUserOnline={isUserOnline}
+              isChatsLoading={isChatsLoading}
+              setActiveChat={handleSetActiveChat}
+            />
+          </di>
 
-          <div>
+          <div className="p-3 bg-blue-900 rounded-lg">
             <ChatBox
               messages={messages}
-              user={userInfo}
+              currentUserId={userInfo._id}
               chat={activeChat}
               sendMessage={handleSendMessage}
             />

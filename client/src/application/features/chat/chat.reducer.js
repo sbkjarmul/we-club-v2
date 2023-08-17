@@ -48,6 +48,9 @@ const chatReducer = createReducer(initialState, (builder) => {
     })
     .addCase(actionTypes.SET_ONLINE_USERS, (state, action) => {
       state.onlineUsers = action.payload;
+    })
+    .addCase(actionTypes.ADD_MESSAGE, (state, action) => {
+      state.messages = [...state.messages, action.payload];
     });
 });
 

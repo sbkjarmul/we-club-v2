@@ -27,15 +27,12 @@ class Socket {
 
   on(eventName, callback) {
     if (this.socket) {
-      console.log("on", eventName);
       this.socket.on(eventName, callback);
     }
   }
 
   off(eventName, callback) {
     if (this.socket) {
-      console.log("off", eventName);
-
       this.socket.off(eventName, callback);
     }
   }
@@ -44,6 +41,9 @@ class Socket {
     if (this.socket) {
       this.socket.emit(eventName, data);
     }
+  }
+  removeAllListeners(listeners = null) {
+    this.socket.removeAllListeners(listeners);
   }
 }
 

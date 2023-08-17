@@ -7,28 +7,26 @@ class ChatSocket {
     this.socketClient = socketClient;
   }
 
-  connect() {
+  connect(userId) {
     this.socketClient.connect(SOCKET_URL);
+    this.socketClient.emit("connectUser", userId);
   }
 
   disconnect() {
-    this.socketClient.disconnect;
+    this.socketClient.removeAllListeners();
+    this.socketClient.disconnect();
   }
 
-  send(message) {
-    this.socketClient.send(message);
+  listenToMessages(callback) {
+    this.socketClient.on("getMessage", callback);
   }
 
-  on(eventName, callback) {
-    this.socketClient.on(eventName, callback);
+  listenToOnlineUsers(callback) {
+    this.socketClient.on("getOnlineUsers", callback);
   }
 
-  off(eventName, callback) {
-    this.socketClient.off(eventName, callback);
-  }
-
-  emit(eventName, data) {
-    this.socketClient.emit(eventName, data);
+  sendMessage(message) {
+    this.socketClient.emit("sendMessage", message);
   }
 }
 

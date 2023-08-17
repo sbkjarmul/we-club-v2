@@ -16,6 +16,7 @@
       "message": "Message",
       "noConversationSelected": "No conversation selected yet...",
       "loadingChat": "Chat is loading...",
+      "loadingMessages": "Messages are loading...",
       "actions": {
         "send": "Send"
       }

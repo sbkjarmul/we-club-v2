@@ -2,8 +2,8 @@ import moment from "moment";
 import PropTypes from "prop-types";
 import ChatAvatar from "./ChatAvatar";
 
-const ChatMessage = ({ message, userId }) => {
-  const isUserSender = message.senderId === userId;
+const ChatMessage = ({ message, currentUserId }) => {
+  const isUserSender = message.senderId === currentUserId;
 
   const getHour = (date) => moment(date).format("HH:mm");
 
@@ -15,10 +15,10 @@ const ChatMessage = ({ message, userId }) => {
     >
       <ChatAvatar size={35} />
       <div
-        className={`flex flex-col text-sm bg-slate-500 rounded-2xl text-white self-end h-auto w-fit max-w-3/4 p-2 mx-1 mb-0.5
+        className={`flex flex-col text-sm bg-blue-500 rounded-2xl text-white self-end h-auto w-fit max-w-3/4 p-2 mx-1 mb-0.5
       ${
         isUserSender
-          ? "self-end bg-slate-400 rounded-tr-none"
+          ? "self-end bg-slate-500 rounded-tr-none"
           : "self-start rounded-tl-none"
       }
       `}
@@ -35,10 +35,9 @@ const ChatMessage = ({ message, userId }) => {
   );
 };
 
-// write prop types
 ChatMessage.propTypes = {
   message: PropTypes.object.isRequired,
-  userId: PropTypes.string.isRequired,
+  currentUserId: PropTypes.string.isRequired,
 };
 
 export default ChatMessage;

@@ -16,6 +16,7 @@ import {
   sendMessageSuccess,
   setMessagesLoader,
   setOnlineUsers,
+  addMessage,
 } from "@/application/features/chat/chat.action";
 import { createMiddleware } from "@/application/helpers";
 import chatSocket from "@/infrastructure/sockets/chat.socket";
@@ -68,6 +69,7 @@ const getMessages = createMiddleware(
     dispatch(setMessagesLoader(true));
     const response = await chatApi.getMessages(action.payload);
     if (response.status === 200) {
+      chatSocket.listenToMessages((message) => dispatch(addMessage(message)));
       dispatch(getMessagesSuccess(response.data));
     } else {
       dispatch(getMessagesFailure());
@@ -82,6 +84,7 @@ const sendMessage = createMiddleware(
     dispatch(setMessagesLoader(true));
     const response = await chatApi.sendMessage(action.payload);
     if (response.status === 200) {
+      chatSocket.sendMessage(action.payload);
       dispatch(sendMessageSuccess(response.data));
     } else {
       dispatch(sendMessageFailure());
@@ -92,11 +95,9 @@ const sendMessage = createMiddleware(
 
 const connectSocket = createMiddleware(
   actionTypes.CONNECT_SOCKET,
-  async (action, dispatch, state) => {
-    const userId = state.auth.userInfo._id;
-    chatSocket.connect();
-    chatSocket.emit("connectUser", userId);
-    chatSocket.on("getOnlineUsers", (users) => dispatch(setOnlineUsers(users)));
+  async (action, dispatch) => {
+    chatSocket.connect(action.payload);
+    chatSocket.listenToOnlineUsers((users) => dispatch(setOnlineUsers(users)));
     dispatch(connectSocketSuccess(chatSocket));
   }
 );
@@ -104,7 +105,6 @@ const connectSocket = createMiddleware(
 const disconnectSocket = createMiddleware(
   actionTypes.DISCONNECT_SOCKET,
   async (action, dispatch) => {
-    chatSocket.off("getOnlineUsers");
     chatSocket.disconnect();
     dispatch(disconnectSocketSuccess());
   }

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useFetchRecipient } from "@/presentation/hooks/useFetchRecipient";
+import { useRecipient } from "@/presentation/hooks/useRecipient";
 import content from "@/presentation/assets/content.json";
 import ChatAvatar from "./ChatAvatar";
 import ChatMessage from "./ChatMessage";
@@ -7,12 +7,12 @@ import ChatInput from "./ChatInput";
 
 const chatContent = content.pages.chat;
 
-const ChatBox = ({ messages, user, chat, loading, sendMessage }) => {
-  const { recipientUser } = useFetchRecipient(chat, user);
+const ChatBox = ({ messages, currentUserId, chat, loading, sendMessage }) => {
+  const { recipientUser } = useRecipient(chat, currentUserId);
 
   if (!recipientUser) {
     return (
-      <div className="border border-black m-1 h-96">
+      <div className="h-96 bg-blue-900 pt-4 text-center">
         <p>{chatContent.noConversationSelected}</p>
       </div>
     );
@@ -20,7 +20,7 @@ const ChatBox = ({ messages, user, chat, loading, sendMessage }) => {
 
   if (loading) {
     return (
-      <div className="border border-black m-1 h-96">
+      <div className="h-96 pt-4 bg-blue-900 text-center">
         <p>{chatContent.loadingChat}</p>
       </div>
     );
@@ -39,12 +39,19 @@ const ChatBox = ({ messages, user, chat, loading, sendMessage }) => {
         <div className="p-3 flex w-full flex-col-reverse h-auto justify-end">
           {messages &&
             messages.map((message, index) => (
-              <ChatMessage message={message} key={index} userId={user._id} />
+              <ChatMessage
+                message={message}
+                key={index}
+                currentUserId={currentUserId}
+              />
             ))}
         </div>
       </div>
       <div className="m-3">
-        <ChatInput placeholder="Aa" onEnter={(value) => sendMessage(value)} />
+        <ChatInput
+          placeholder="Aa"
+          onEnter={(value) => sendMessage(value, recipientUser._id)}
+        />
       </div>
     </div>
   );
@@ -58,7 +65,7 @@ ChatBox.propTypes = {
       senderId: PropTypes.string,
     })
   ),
-  user: PropTypes.object,
+  currentUserId: PropTypes.string,
   chat: PropTypes.object,
   loading: PropTypes.bool,
   sendMessage: PropTypes.func,
