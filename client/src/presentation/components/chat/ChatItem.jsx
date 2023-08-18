@@ -1,29 +1,39 @@
 import PropTypes from "prop-types";
 import { useRecipient } from "@/presentation/hooks/useRecipient";
 import ChatAvatar from "./ChatAvatar";
+import { useNotifications } from "../../hooks/useNotifications";
+import { getHour } from "@/presentation/utils/";
 
 // TODO: rebuild dummy component
-const ChatItem = ({ chat, currentUserId, isUserOnline }) => {
+const ChatItem = ({ chat, currentUserId, isUserOnline, openChat }) => {
   const { recipientUser } = useRecipient(chat, currentUserId);
+  const { notificationsCount, clearNotifications, lastMessage } =
+    useNotifications(chat._id);
+
+  const handleOnClick = () => {
+    openChat(chat);
+    clearNotifications(chat._id);
+  };
+
   console.log("ChatItem render");
   return (
-    <div className="bg-blue-500 text-white p-1 border-bottom m-1">
+    <div
+      className="text-white p-1 border-b border-blue-500 m-1"
+      onClick={handleOnClick}
+    >
       <div className="flex justify-between">
         <div className="flex">
           <div className="flex items-center mr-1">
-            <ChatAvatar />
+            <ChatAvatar size={30} isOnline={isUserOnline(recipientUser?._id)} />
           </div>
           <div>
-            {isUserOnline(recipientUser?._id) && (
-              <div className="inline-block rounded-full bg-green-500 h-3 w-3" />
-            )}
             <div>{recipientUser?.name}</div>
-            <div className="text-xs">Text message</div>
+            <div className="text-xs w-24 truncate ...">{lastMessage}</div>
           </div>
         </div>
-        <div className="flex flex-col items-end">
-          <div>12/12/2012</div>
-          <div className="rounded-full bg-blue-300 px-2 w-6">2</div>
+        <div className="flex flex-col items-end justify-between">
+          <div className="text-2xs">{getHour(lastMessage?.createdAt)}</div>
+          <div className="text-cyan-500 text-2xs">{notificationsCount}</div>
         </div>
       </div>
     </div>
@@ -34,6 +44,7 @@ ChatItem.propTypes = {
   chat: PropTypes.object,
   currentUserId: PropTypes.string,
   isUserOnline: PropTypes.func,
+  openChat: PropTypes.func,
 };
 
 export default ChatItem;

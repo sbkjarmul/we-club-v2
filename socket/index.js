@@ -24,6 +24,12 @@ io.on("connection", (socket) => {
 
     if (user) {
       io.to(user.socketId).emit("getMessage", message);
+      io.to(user.socketId).emit("getNotification", {
+        senderId: message.senderId,
+        chatId: message.chatId,
+        message: message.text,
+        date: new Date(),
+      });
     }
   });
 

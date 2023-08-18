@@ -31,3 +31,7 @@ export const selectOnlineUsers = createSelector(
   selectChat,
   (chat) => chat.onlineUsers
 );
+export const selectNotifications = createSelector(
+  selectChat,
+  (chat) => chat.notifications
+);

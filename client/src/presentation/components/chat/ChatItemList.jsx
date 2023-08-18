@@ -7,21 +7,21 @@ const chatContent = content.pages.chat;
 const ChatItemList = ({
   isChatsLoading,
   isUserOnline,
-  setActiveChat,
+  openChat,
   chats,
   currentUserId,
 }) => {
   return (
     <>
       {isChatsLoading && <div>{chatContent.loadingChat}</div>}
-      {chats.map((chat, index) => (
-        <div key={index} onClick={() => setActiveChat(chat)}>
-          <ChatItem
-            chat={chat}
-            currentUserId={currentUserId}
-            isUserOnline={isUserOnline}
-          />
-        </div>
+      {chats.map((chat) => (
+        <ChatItem
+          key={chat._id}
+          chat={chat}
+          currentUserId={currentUserId}
+          isUserOnline={isUserOnline}
+          openChat={openChat}
+        />
       ))}
     </>
   );
@@ -30,7 +30,7 @@ const ChatItemList = ({
 ChatItemList.propTypes = {
   isChatsLoading: PropTypes.bool,
   isUserOnline: PropTypes.func,
-  setActiveChat: PropTypes.func,
+  openChat: PropTypes.func,
   chats: PropTypes.array,
   currentUserId: PropTypes.string,
 };

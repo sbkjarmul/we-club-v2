@@ -7,7 +7,6 @@ class Socket {
 
   connect(url) {
     if (!this.socket) {
-      console.log(url);
       this.socket = io(url);
     }
   }

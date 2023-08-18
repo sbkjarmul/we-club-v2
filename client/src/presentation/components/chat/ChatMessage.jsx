@@ -1,11 +1,9 @@
-import moment from "moment";
 import PropTypes from "prop-types";
 import ChatAvatar from "./ChatAvatar";
+import { getHour } from "@/presentation/utils/";
 
 const ChatMessage = ({ message, currentUserId }) => {
   const isUserSender = message.senderId === currentUserId;
-
-  const getHour = (date) => moment(date).format("HH:mm");
 
   return (
     <div

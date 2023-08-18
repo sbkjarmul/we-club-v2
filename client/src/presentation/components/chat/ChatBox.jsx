@@ -4,10 +4,19 @@ import content from "@/presentation/assets/content.json";
 import ChatAvatar from "./ChatAvatar";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
+import BaseButton from "@/presentation/components/shared/BaseButton";
+import closeIcon from "@/presentation/assets/icons/close.svg";
 
 const chatContent = content.pages.chat;
 
-const ChatBox = ({ messages, currentUserId, chat, loading, sendMessage }) => {
+const ChatBox = ({
+  messages,
+  currentUserId,
+  chat,
+  loading,
+  sendMessage,
+  closeChat,
+}) => {
   const { recipientUser } = useRecipient(chat, currentUserId);
 
   if (!recipientUser) {
@@ -28,11 +37,14 @@ const ChatBox = ({ messages, currentUserId, chat, loading, sendMessage }) => {
 
   return (
     <div className="relative h-full bg-blue-900">
-      <div className="absolute z-10 t-0 l-0 w-full bg-blue-900 flex justify-start items-center font-light pl-1 py-1 mb-3">
-        <ChatAvatar size={25} />
-        <span className="text-white text-xs ml-2">
-          {recipientUser?.name || "Recipient Name"}
-        </span>
+      <div className="absolute z-10 t-0 l-0 w-full bg-blue-900 pl-1 py-1 mb-3 flex justify-between items-center border-b border-cyan-500">
+        <div className="flex justify-start items-center font-light ">
+          <ChatAvatar size={25} />
+          <span className="text-white text-xs ml-2">{recipientUser?.name}</span>
+        </div>
+        <BaseButton isOutlined onClick={closeChat}>
+          <img src={closeIcon} alt="Close" className="invert w-2 h-2" />
+        </BaseButton>
       </div>
 
       <div className="overflow-y-auto h-96 rotate-180" dir="rtl">
@@ -69,6 +81,7 @@ ChatBox.propTypes = {
   chat: PropTypes.object,
   loading: PropTypes.bool,
   sendMessage: PropTypes.func,
+  closeChat: PropTypes.func,
 };
 
 export default ChatBox;

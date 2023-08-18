@@ -17,6 +17,7 @@ import {
   setMessagesLoader,
   setOnlineUsers,
   addMessage,
+  addNotification,
 } from "@/application/features/chat/chat.action";
 import { createMiddleware } from "@/application/helpers";
 import chatSocket from "@/infrastructure/sockets/chat.socket";
@@ -98,6 +99,9 @@ const connectSocket = createMiddleware(
   async (action, dispatch) => {
     chatSocket.connect(action.payload);
     chatSocket.listenToOnlineUsers((users) => dispatch(setOnlineUsers(users)));
+    chatSocket.listenToNotifications((notification) => {
+      dispatch(addNotification(notification));
+    });
     dispatch(connectSocketSuccess(chatSocket));
   }
 );

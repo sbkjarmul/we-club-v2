@@ -21,6 +21,10 @@ class ChatSocket {
     this.socketClient.on("getMessage", callback);
   }
 
+  listenToNotifications(callback) {
+    this.socketClient.on("getNotification", callback);
+  }
+
   listenToOnlineUsers(callback) {
     this.socketClient.on("getOnlineUsers", callback);
   }

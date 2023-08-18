@@ -9,6 +9,7 @@ const initialState = {
   allUsers: [],
   activeChat: null,
   messages: [],
+  notifications: [],
   messagesError: null,
   areMessagesLoading: false,
   onlineUsers: [],
@@ -51,6 +52,21 @@ const chatReducer = createReducer(initialState, (builder) => {
     })
     .addCase(actionTypes.ADD_MESSAGE, (state, action) => {
       state.messages = [...state.messages, action.payload];
+    })
+    .addCase(actionTypes.ADD_NOTIFICATION, (state, action) => {
+      const newNotification = { ...action.payload };
+      const isChatOpen = state?.activeChat?.members.some(
+        (id) => id === newNotification.senderId
+      );
+      if (!isChatOpen) {
+        state.notifications = [...state.notifications, newNotification];
+      }
+    })
+    .addCase(actionTypes.DELETE_NOTIFICATIONS, (state, action) => {
+      const chatId = action.payload;
+      state.notifications = state.notifications.filter(
+        (notification) => notification.chatId !== chatId
+      );
     });
 });
 

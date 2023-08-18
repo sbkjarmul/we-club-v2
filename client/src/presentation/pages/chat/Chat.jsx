@@ -62,9 +62,13 @@ const Chat = () => {
     dispatch(createChat({ firstId: userInfo._id, secondId: recipientId }));
   };
 
-  const handleSetActiveChat = (chat) => {
+  const openChat = (chat) => {
     dispatch(setActiveChat(chat));
     dispatch(getMessages(chat._id));
+  };
+
+  const closeChat = () => {
+    dispatch(setActiveChat(null));
   };
 
   const handleSendMessage = (text, recipientId) => {
@@ -97,16 +101,16 @@ const Chat = () => {
             />
           </div>
 
-          <di className="my-3 p-3 bg-blue-900 rounded-lg overflow-y-auto">
+          <div className="my-3 p-3 bg-blue-900 rounded-lg overflow-y-auto">
             Chats:
             <ChatItemList
               currentUserId={userInfo._id}
               chats={userChats}
               isUserOnline={isUserOnline}
               isChatsLoading={isChatsLoading}
-              setActiveChat={handleSetActiveChat}
+              openChat={openChat}
             />
-          </di>
+          </div>
 
           <div className="p-3 bg-blue-900 rounded-lg">
             <ChatBox
@@ -114,6 +118,7 @@ const Chat = () => {
               currentUserId={userInfo._id}
               chat={activeChat}
               sendMessage={handleSendMessage}
+              closeChat={closeChat}
             />
           </div>
         </div>

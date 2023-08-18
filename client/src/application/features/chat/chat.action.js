@@ -28,6 +28,8 @@ export const actionTypes = {
   LOGIN_TO_CHAT: "LOGIN_TO_CHAT",
   SET_ONLINE_USERS: "SET_ONLINE_USERS",
   ADD_MESSAGE: "ADD_MESSAGE",
+  ADD_NOTIFICATION: "ADD_NOTIFICATION",
+  DELETE_NOTIFICATIONS: "DELETE_NOTIFICATIONS",
 };
 
 export const setChatLoader = createActionWithPayload(
@@ -86,3 +88,9 @@ export const setOnlineUsers = createActionWithPayload(
   actionTypes.SET_ONLINE_USERS
 );
 export const addMessage = createActionWithPayload(actionTypes.ADD_MESSAGE);
+export const addNotification = createActionWithPayload(
+  actionTypes.ADD_NOTIFICATION
+);
+export const deleteNotifications = createActionWithPayload(
+  actionTypes.DELETE_NOTIFICATIONS
+);
