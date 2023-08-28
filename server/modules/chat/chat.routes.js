@@ -1,9 +1,5 @@
 const express = require("express");
-const {
-  createChat,
-  findChat,
-  findUserChats,
-} = require("../controllers/chatController");
+const { createChat, findChat, findUserChats } = require("./chat.controller");
 
 const router = express.Router();
 

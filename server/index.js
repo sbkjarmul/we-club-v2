@@ -1,16 +1,15 @@
+const db = require("./database");
 const express = require("express");
 const cors = require("cors");
-const userRoutes = require("./routes/userRoutes");
-const chatRoutes = require("./routes/chatRoutes");
-const messageRoutes = require("./routes/messageRoutes");
 const dotenv = require("dotenv").config();
-const connectDb = require("./config/database");
-
-connectDb();
+const userRoutes = require("./modules/user/user.routes");
+const chatRoutes = require("./modules/chat/chat.routes");
+const messageRoutes = require("./modules/message/message.routes");
 
 const app = express();
-
 const port = process.env.PORT || 5001;
+
+db.connect();
 
 app.use(express.json());
 app.use(cors());

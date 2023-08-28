@@ -1,11 +1,10 @@
-const Chat = require("../models/chatModel");
-const User = require("../models/userModel");
+const db = require("../../database");
 const asyncHandler = require("express-async-handler");
 
 const createChat = asyncHandler(async (req, res) => {
   const { firstId, secondId } = req.body;
 
-  const chat = await Chat.findOne({
+  const chat = await db.chats.findOne({
     members: { $all: [firstId, secondId] },
   });
 
@@ -13,17 +12,15 @@ const createChat = asyncHandler(async (req, res) => {
     return res.status(200).json(chat);
   }
 
-  const newChat = new Chat({ members: [firstId, secondId] });
+  const newChat = await db.chats.create({ members: [firstId, secondId] });
 
-  const response = await newChat.save();
-
-  return res.status(200).json(response);
+  return res.status(200).json(newChat);
 });
 
 const findUserChats = asyncHandler(async (req, res) => {
   const userId = req.params.userId;
 
-  const chats = await Chat.find({ members: { $in: [userId] } });
+  const chats = await db.chats.findMany({ members: { $in: [userId] } });
 
   return res.status(200).json(chats);
 });
@@ -31,9 +28,11 @@ const findUserChats = asyncHandler(async (req, res) => {
 const findChat = asyncHandler(async (req, res) => {
   const { firstId, secondId } = req.params;
 
-  const chats = await Chat.findOne({ members: { $all: [firstId, secondId] } });
+  const chat = await db.chats.findOne({
+    members: { $all: [firstId, secondId] },
+  });
 
-  return res.status(200).json(chats);
+  return res.status(200).json(chat);
 });
 
 module.exports = { createChat, findUserChats, findChat };
