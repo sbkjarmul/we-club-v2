@@ -1,24 +1,34 @@
 const db = require("../../database");
-
+const MessageService = require("./message.service");
+const MessageRepository = require("./message.repository");
 const asyncHandler = require("express-async-handler");
 
-const createMessage = asyncHandler(async (req, res) => {
-  const { chatId, senderId, text } = req.body;
+class MessageController {
+  constructor(messageService) {
+    this.messageService = messageService;
+  }
 
-  const message = await db.messages.create({
-    chatId,
-    senderId,
-    text,
+  createMessage = asyncHandler(async (req, res) => {
+    const { chatId, senderId, text } = req.body;
+
+    const message = await this.messageService.createMessage({
+      chatId,
+      senderId,
+      text,
+    });
+
+    res.status(200).json(message);
   });
 
-  return res.status(200).json(message);
-});
+  findMessages = asyncHandler(async (req, res) => {
+    const chatId = req.params.chatId;
 
-const findMessages = asyncHandler(async (req, res) => {
-  const chatId = req.params.chatId;
+    const messages = this.messageService.findMessages({ chatId });
 
-  const messages = await db.messages.findMany({ chatId });
-  res.status(200).json(messages);
-});
+    res.status(200).json(messages);
+  });
+}
 
-module.exports = { createMessage, findMessages };
+module.exports = new MessageController(
+  new MessageService(new MessageRepository(db.messages))
+);

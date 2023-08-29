@@ -1,38 +1,38 @@
 const db = require("../../database");
 const asyncHandler = require("express-async-handler");
+const ChatService = require("./chat.service");
+const ChatRepository = require("./chat.repository");
 
-const createChat = asyncHandler(async (req, res) => {
-  const { firstId, secondId } = req.body;
-
-  const chat = await db.chats.findOne({
-    members: { $all: [firstId, secondId] },
-  });
-
-  if (chat) {
-    return res.status(200).json(chat);
+class ChatController {
+  constructor(chatService) {
+    this.chatService = chatService;
   }
 
-  const newChat = await db.chats.create({ members: [firstId, secondId] });
+  createChat = asyncHandler(async (req, res) => {
+    const { firstId, secondId } = req.body;
 
-  return res.status(200).json(newChat);
-});
+    const chat = await this.chatService.createChat(firstId, secondId);
 
-const findUserChats = asyncHandler(async (req, res) => {
-  const userId = req.params.userId;
-
-  const chats = await db.chats.findMany({ members: { $in: [userId] } });
-
-  return res.status(200).json(chats);
-});
-
-const findChat = asyncHandler(async (req, res) => {
-  const { firstId, secondId } = req.params;
-
-  const chat = await db.chats.findOne({
-    members: { $all: [firstId, secondId] },
+    return res.status(200).json(chat);
   });
 
-  return res.status(200).json(chat);
-});
+  findUserChats = asyncHandler(async (req, res) => {
+    const userId = req.params.userId;
 
-module.exports = { createChat, findUserChats, findChat };
+    const chats = await this.chatService.findManyChats(userId);
+
+    return res.status(200).json(chats);
+  });
+
+  findChat = asyncHandler(async (req, res) => {
+    const { firstId, secondId } = req.params;
+
+    const chat = await this.chatService.findChat(firstId, secondId);
+
+    return res.status(200).json(chat);
+  });
+}
+
+module.exports = new ChatController(
+  new ChatService(new ChatRepository(db.chats))
+);

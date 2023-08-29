@@ -2,6 +2,7 @@ class DatabaseInterface {
   chat;
   user;
   message;
+  connect() {}
 }
 
 class DataTableInterface {
