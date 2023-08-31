@@ -13,7 +13,8 @@ class MessageRepository {
         senderId,
         text,
       });
-      return createdMessage;
+      const messageEntity = MessageMapper.toEntity(createdMessage);
+      return messageEntity;
     } catch (error) {
       throw new Error(MESSAGES_ERRORS.CREATE_MESSAGE_FAILED);
     }
@@ -22,7 +23,8 @@ class MessageRepository {
   async findManyMessages(chatId) {
     try {
       const messages = await this.messageTable.findMany({ chatId });
-      return messages;
+      const messagesEntities = MessageMapper.toEntity(messages);
+      return messagesEntities;
     } catch (error) {
       throw new Error(MESSAGES_ERRORS.FIND_MESSAGES_FAILED);
     }

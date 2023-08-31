@@ -15,7 +15,10 @@ class MongoDataTable extends DataTableInterface {
     return this.table.findOne(query);
   }
 
-  async findMany(query) {
+  async findMany(query, select) {
+    if (select) {
+      return this.table.find(query).select(select);
+    }
     return this.table.find(query);
   }
 

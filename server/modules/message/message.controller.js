@@ -1,6 +1,3 @@
-const db = require("../../database");
-const MessageService = require("./message.service");
-const MessageRepository = require("./message.repository");
 const asyncHandler = require("express-async-handler");
 
 class MessageController {
@@ -29,6 +26,4 @@ class MessageController {
   });
 }
 
-module.exports = new MessageController(
-  new MessageService(new MessageRepository(db.messages))
-);
+module.exports = MessageController;

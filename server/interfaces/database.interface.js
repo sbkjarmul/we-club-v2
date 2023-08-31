@@ -8,7 +8,7 @@ class DatabaseInterface {
 class DataTableInterface {
   create() {}
   findOne() {}
-  findMany() {}
+  findMany(query, select) {}
   findById() {}
 }
 

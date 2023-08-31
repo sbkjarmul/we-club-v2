@@ -95,6 +95,7 @@ class UserService {
   async getAllUsers() {
     try {
       const users = await this.userRepository.findManyUsers();
+
       return users;
     } catch (error) {
       throw new Error(error.message);

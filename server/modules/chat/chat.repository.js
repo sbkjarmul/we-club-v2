@@ -1,4 +1,5 @@
 const { CHAT_ERRORS } = require("./chat.constants");
+const ChatMapper = require("./chat.mapper");
 
 class ChatRepository {
   constructor(chatsTable) {
@@ -12,14 +13,14 @@ class ChatRepository {
       });
 
       if (chat) {
-        return chat;
+        return ChatMapper.toEntity(chat);
       }
 
       const newChat = await this.chatsTable.create({
         members: [firstId, secondId],
       });
-
-      return newChat;
+      const chatEntity = ChatMapper.toEntity(newChat);
+      return chatEntity;
     } catch (error) {
       throw new Error(CHAT_ERRORS.UNABLE_TO_CREATE_CHAT);
     }
@@ -34,7 +35,8 @@ class ChatRepository {
       throw new Error(CHAT_ERRORS.CHAT_NOT_FOUND);
     }
 
-    return chats;
+    const chatsEntities = ChatMapper.toEntity(chats);
+    return chatsEntities;
   }
 
   async findChat(firstId, secondId) {
@@ -46,7 +48,8 @@ class ChatRepository {
       throw new Error(CHAT_ERRORS.CHAT_NOT_FOUND);
     }
 
-    return chat;
+    const chatEntity = ChatMapper.toEntity(newChat);
+    return chatEntity;
   }
 }
 

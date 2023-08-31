@@ -1,7 +1,4 @@
-const db = require("../../database");
 const asyncHandler = require("express-async-handler");
-const UserService = require("./user.service");
-const UserRepository = require("./user.repository");
 
 class UserController {
   constructor(userService) {
@@ -40,8 +37,4 @@ class UserController {
   });
 }
 
-console.log(db.users);
-
-module.exports = new UserController(
-  new UserService(new UserRepository(db.users))
-);
+module.exports = UserController;

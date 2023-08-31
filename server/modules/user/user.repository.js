@@ -1,4 +1,5 @@
 const { USER_ERRORS } = require("./user.constants");
+const UserMapper = require("./user.mapper");
 
 class UserRepository {
   constructor(usersTable) {
@@ -13,7 +14,8 @@ class UserRepository {
         email,
         password,
       });
-      return createdUser;
+      const userEntity = UserMapper.toEntity(createdUser);
+      return userEntity;
     } catch (error) {
       throw new Error(USER_ERRORS.CREATE_USER_FAILED);
     }
@@ -22,8 +24,9 @@ class UserRepository {
   async findUser(email) {
     try {
       const user = await this.usersTable.findOne({ email });
-
-      return user;
+      if (!user) return false;
+      const userEntity = UserMapper.toEntity(user);
+      return userEntity;
     } catch (error) {
       throw new Error(USER_ERRORS.USER_NOT_FOUND);
     }
@@ -31,8 +34,9 @@ class UserRepository {
 
   async findManyUsers() {
     try {
-      const users = await this.usersTable.findMany({}).select("-password");
-      return users;
+      const users = await this.usersTable.findMany({}, "-password");
+      const usersEntities = users.map((user) => UserMapper.toEntity(user));
+      return usersEntities;
     } catch (error) {
       throw new Error(USER_ERRORS.USER_NOT_FOUND);
     }

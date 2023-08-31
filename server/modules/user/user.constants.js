@@ -1,5 +1,5 @@
 const USER_ERRORS = {
-  CREATE_USER_FAILED: "Unable to create user",
+  CREATE_USER_FAILED: "Create user failed",
   USER_NOT_FOUND: "User not found",
   USER_ALREADY_EXISTS: "User already exists",
   EMPTY_FIELDS: "EMPTY_FIELDS",

@@ -1,7 +1,4 @@
-const db = require("../../database");
 const asyncHandler = require("express-async-handler");
-const ChatService = require("./chat.service");
-const ChatRepository = require("./chat.repository");
 
 class ChatController {
   constructor(chatService) {
@@ -33,6 +30,4 @@ class ChatController {
   });
 }
 
-module.exports = new ChatController(
-  new ChatService(new ChatRepository(db.chats))
-);
+module.exports = ChatController;
