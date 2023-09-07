@@ -17,7 +17,7 @@ export const selectAllUsers = createSelector(
 );
 export const selectOtherUsers = createSelector(
   [selectChat, selectAuth],
-  (chat, auth) => chat.allUsers.filter((user) => user._id !== auth.userInfo._id)
+  (chat, auth) => chat.allUsers.filter((user) => user.id !== auth.userInfo.id)
 );
 export const selectMessages = createSelector(
   selectChat,

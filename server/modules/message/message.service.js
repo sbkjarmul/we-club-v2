@@ -3,10 +3,12 @@ class MessageService {
     this.messageRepository = messageRepository;
   }
 
-  async createMessage(message) {
+  async createMessage(chatId, senderId, text) {
     try {
       const createdMessage = await this.messageRepository.createMessage(
-        message
+        chatId,
+        senderId,
+        text
       );
       return createdMessage;
     } catch (error) {

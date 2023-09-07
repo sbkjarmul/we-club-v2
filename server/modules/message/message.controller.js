@@ -8,11 +8,11 @@ class MessageController {
   createMessage = asyncHandler(async (req, res) => {
     const { chatId, senderId, text } = req.body;
 
-    const message = await this.messageService.createMessage({
+    const message = await this.messageService.createMessage(
       chatId,
       senderId,
-      text,
-    });
+      text
+    );
 
     res.status(200).json(message);
   });
@@ -20,8 +20,7 @@ class MessageController {
   findMessages = asyncHandler(async (req, res) => {
     const chatId = req.params.chatId;
 
-    const messages = this.messageService.findMessages({ chatId });
-
+    const messages = await this.messageService.findMessages(chatId);
     res.status(200).json(messages);
   });
 }

@@ -6,7 +6,6 @@ class ChatService {
   async createChat(firstId, secondId) {
     try {
       const chat = await this.chatRepository.createChat(firstId, secondId);
-
       return chat;
     } catch (error) {
       throw new Error(error.message);

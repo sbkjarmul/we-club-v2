@@ -62,7 +62,7 @@ const ChatBox = ({
       <div className="m-3">
         <ChatInput
           placeholder="Aa"
-          onEnter={(value) => sendMessage(value, recipientUser._id)}
+          onEnter={(value) => sendMessage(value, recipientUser.id)}
         />
       </div>
     </div>

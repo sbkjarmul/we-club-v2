@@ -8,11 +8,11 @@ import { getHour } from "@/presentation/utils/";
 const ChatItem = ({ chat, currentUserId, isUserOnline, openChat }) => {
   const { recipientUser } = useRecipient(chat, currentUserId);
   const { notificationsCount, clearNotifications, lastMessage } =
-    useNotifications(chat._id);
+    useNotifications(chat.id);
 
   const handleOnClick = () => {
     openChat(chat);
-    clearNotifications(chat._id);
+    clearNotifications(chat.id);
   };
 
   console.log("ChatItem render");
@@ -24,7 +24,7 @@ const ChatItem = ({ chat, currentUserId, isUserOnline, openChat }) => {
       <div className="flex justify-between">
         <div className="flex">
           <div className="flex items-center mr-1">
-            <ChatAvatar size={30} isOnline={isUserOnline(recipientUser?._id)} />
+            <ChatAvatar size={30} isOnline={isUserOnline(recipientUser?.id)} />
           </div>
           <div>
             <div>{recipientUser?.name}</div>

@@ -9,7 +9,6 @@ class ChatController {
     const { firstId, secondId } = req.body;
 
     const chat = await this.chatService.createChat(firstId, secondId);
-
     return res.status(200).json(chat);
   });
 

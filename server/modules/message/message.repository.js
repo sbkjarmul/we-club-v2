@@ -1,12 +1,12 @@
 const { MESSAGES_ERRORS } = require("./message.constants");
+const MessageMapper = require("./message.mapper");
 
 class MessageRepository {
   constructor(messageTable) {
     this.messageTable = messageTable;
   }
 
-  async createMessage(message) {
-    const { chatId, senderId, text } = message;
+  async createMessage(chatId, senderId, text) {
     try {
       const createdMessage = await this.messageTable.create({
         chatId,
@@ -26,6 +26,7 @@ class MessageRepository {
       const messagesEntities = MessageMapper.toEntity(messages);
       return messagesEntities;
     } catch (error) {
+      console.log(error);
       throw new Error(MESSAGES_ERRORS.FIND_MESSAGES_FAILED);
     }
   }

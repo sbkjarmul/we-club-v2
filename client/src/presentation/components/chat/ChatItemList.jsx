@@ -16,7 +16,7 @@ const ChatItemList = ({
       {isChatsLoading && <div>{chatContent.loadingChat}</div>}
       {chats.map((chat) => (
         <ChatItem
-          key={chat._id}
+          key={chat.id}
           chat={chat}
           currentUserId={currentUserId}
           isUserOnline={isUserOnline}

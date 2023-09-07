@@ -39,12 +39,12 @@ const Chat = () => {
 
   useEffect(() => {
     // TODO: create mapper for dtos
-    dispatch(getUserChats(userInfo._id));
+    dispatch(getUserChats(userInfo.id));
     dispatch(getAllUsers());
   }, []);
 
   useEffect(() => {
-    dispatch(connectSocket(userInfo._id));
+    dispatch(connectSocket(userInfo.id));
 
     return () => {
       dispatch(disconnectSocket());
@@ -59,12 +59,12 @@ const Chat = () => {
 
   const handleCreateChat = (recipientId) => {
     if (isChatExists(recipientId)) return;
-    dispatch(createChat({ firstId: userInfo._id, secondId: recipientId }));
+    dispatch(createChat({ firstId: userInfo.id, secondId: recipientId }));
   };
 
   const openChat = (chat) => {
     dispatch(setActiveChat(chat));
-    dispatch(getMessages(chat._id));
+    dispatch(getMessages(chat.id));
   };
 
   const closeChat = () => {
@@ -73,8 +73,8 @@ const Chat = () => {
 
   const handleSendMessage = (text, recipientId) => {
     const message = {
-      chatId: activeChat._id,
-      senderId: userInfo._id,
+      chatId: activeChat.id,
+      senderId: userInfo.id,
       to: recipientId,
       text,
     };
@@ -104,7 +104,7 @@ const Chat = () => {
           <div className="my-3 p-3 bg-blue-900 rounded-lg overflow-y-auto">
             Chats:
             <ChatItemList
-              currentUserId={userInfo._id}
+              currentUserId={userInfo.id}
               chats={userChats}
               isUserOnline={isUserOnline}
               isChatsLoading={isChatsLoading}
@@ -115,7 +115,7 @@ const Chat = () => {
           <div className="p-3 bg-blue-900 rounded-lg">
             <ChatBox
               messages={messages}
-              currentUserId={userInfo._id}
+              currentUserId={userInfo.id}
               chat={activeChat}
               sendMessage={handleSendMessage}
               closeChat={closeChat}

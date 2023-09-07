@@ -7,7 +7,7 @@ const ChatUsersList = ({ users, createChat, isUserOnline }) => {
       {users.map((user) => (
         <ChatUser
           user={user}
-          key={user._id}
+          key={user.id}
           isOnline={isUserOnline}
           onClick={createChat}
         />

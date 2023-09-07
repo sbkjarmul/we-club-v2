@@ -8,7 +8,7 @@ class ChatRepository {
 
   async createChat(firstId, secondId) {
     try {
-      const chat = this.chatsTable.findOne({
+      const chat = await this.chatsTable.findOne({
         members: { $all: [firstId, secondId] },
       });
 
