@@ -5,6 +5,7 @@ import Login from "@/presentation/pages/auth/Login";
 import Register from "@/presentation/pages/auth/Register";
 import Header from "@/presentation/components/blocks/Header";
 import BaseLoader from "@/presentation/components/shared/BaseLoader";
+import Main from "./pages/main/Main";
 
 function App() {
   const userInfo = useSelector((state) => state.auth.userInfo);
@@ -24,6 +25,7 @@ function App() {
             element={!userInfo ? <Login /> : <Navigate to="/" />}
           />
           <Route path="/register" element={<Register />} />
+          <Route path="/main" element={<Main />} />
           <Route path="/*" element={<Navigate to="/" />} />
         </Routes>
       </div>

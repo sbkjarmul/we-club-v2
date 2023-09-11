@@ -21,7 +21,7 @@ const ChatBox = ({
 
   if (!recipientUser) {
     return (
-      <div className="h-96 bg-blue-900 pt-4 text-center">
+      <div className="h-48 bg-blue-900 pt-4 text-center">
         <p>{chatContent.noConversationSelected}</p>
       </div>
     );
@@ -29,7 +29,7 @@ const ChatBox = ({
 
   if (loading) {
     return (
-      <div className="h-96 pt-4 bg-blue-900 text-center">
+      <div className="h-48 pt-4 bg-blue-900 text-center">
         <p>{chatContent.loadingChat}</p>
       </div>
     );
@@ -47,7 +47,7 @@ const ChatBox = ({
         </BaseButton>
       </div>
 
-      <div className="overflow-y-auto h-96 rotate-180" dir="rtl">
+      <div className="overflow-y-auto h-48 rotate-180" dir="rtl">
         <div className="p-3 flex w-full flex-col-reverse h-auto justify-end">
           {messages &&
             messages.map((message, index) => (

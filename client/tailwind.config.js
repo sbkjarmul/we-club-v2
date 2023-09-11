@@ -21,6 +21,12 @@ export default {
           },
         ],
       },
+      dropShadow: {
+        cyan: [
+          "0 0 35px rgba(52, 211, 153, 0.25)",
+          "0 15px 65px rgba(52, 211, 153, 0.15)",
+        ],
+      },
     },
   },
   plugins: [],

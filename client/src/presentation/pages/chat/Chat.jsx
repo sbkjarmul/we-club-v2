@@ -91,7 +91,7 @@ const Chat = () => {
           </div>
         </div>
 
-        <div className="bg-blue-950 grid grid-rows-[100px_1fr_auto] p-3">
+        <div className="bg-blue-950 grid grid-rows-[150px_1fr_auto] p-3">
           <div className="p-3 bg-blue-900 rounded-lg overflow-y-auto">
             <span className="text-blue-200">Users:</span>
             <ChatUsersList

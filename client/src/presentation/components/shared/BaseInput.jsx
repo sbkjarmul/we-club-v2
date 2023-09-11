@@ -17,11 +17,7 @@ const BaseInput = ({ className, onEnter, ...props }) => {
   return (
     <div className="relative flex flex-col w-100">
       <input
-        className={
-          className
-            ? className
-            : "w-full bg-blue-900 py-2 px-3 focus:outline-none"
-        }
+        className={`${className} w-full bg-blue-900 py-2 px-3 focus:outline-none`}
         onKeyDown={onKeyDownHandler}
         value={value}
         onChange={(event) => setValue(event.target.value)}

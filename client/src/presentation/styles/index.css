@@ -36,3 +36,23 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
   color: white;
 }
+
+.st0 {
+  /* fill: #ffffff; */
+  @apply fill-slate-400;
+}
+.st1 {
+  fill: none;
+}
+.st2 {
+  font-family: "EthnocentricRg-Regular";
+}
+.st3 {
+  font-size: 66.1656px;
+}
+.st4 {
+  font-family: "HiraKakuStdN-W8-83pv-RKSJ-H";
+}
+.st5 {
+  font-size: 21.9789px;
+}
