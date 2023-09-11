@@ -13,7 +13,7 @@ class UserController {
       password,
     });
 
-    res.status(200).json(user);
+    res.status(201).json(user);
   });
 
   loginUser = asyncHandler(async (req, res) => {
