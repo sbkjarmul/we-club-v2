@@ -12,7 +12,7 @@ const ChatItemList = ({
   currentUserId,
 }) => {
   return (
-    <>
+    <div className="flex flex-col">
       {isChatsLoading && <div>{chatContent.loadingChat}</div>}
       {chats.map((chat) => (
         <ChatItem
@@ -23,7 +23,7 @@ const ChatItemList = ({
           openChat={openChat}
         />
       ))}
-    </>
+    </div>
   );
 };
 

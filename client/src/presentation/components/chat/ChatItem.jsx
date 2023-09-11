@@ -18,7 +18,7 @@ const ChatItem = ({ chat, currentUserId, isUserOnline, openChat }) => {
   console.log("ChatItem render");
   return (
     <div
-      className="text-white p-1 border-b border-blue-500 m-1"
+      className="text-white p-1 border-b border-blue-500 m-1 cursor-pointer"
       onClick={handleOnClick}
     >
       <div className="flex justify-between">
