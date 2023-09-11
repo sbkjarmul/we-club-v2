@@ -2,10 +2,11 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import BaseButton from "@/presentation/components/shared/BaseButton";
 import BaseLogo from "@/presentation/components/shared/BaseLogo";
+import BaseButton from "@/presentation/components/shared/BaseButton";
 import content from "@/presentation/assets/content.json";
-import { logoutUser } from "../../../application/features/auth/auth.action";
+import { logoutUser } from "../../../../application/features/auth/auth.action";
+import HeaderUserInfo from "./HeaderUserInfo";
 
 const headerContent = content.components.header;
 
@@ -22,29 +23,19 @@ const Header = ({ userInfo }) => {
         <BaseLogo size={50} />
       </Link>
 
-      <div>
-        Logged: <span className="text-white">{userInfo?.name}</span>
-      </div>
+      {userInfo && <HeaderUserInfo userInfo={userInfo} logout={handleLogout} />}
 
-      <>
-        {userInfo && (
-          <BaseButton isBorderless onClick={handleLogout}>
-            {headerContent.logout}
+      {!userInfo && (
+        <div>
+          <BaseButton isBorderless>
+            <Link to="/login">{headerContent.login}</Link>
           </BaseButton>
-        )}
 
-        {!userInfo && (
-          <div>
-            <BaseButton isBorderless>
-              <Link to="/login">{headerContent.login}</Link>
-            </BaseButton>
-
-            <BaseButton isOutlined>
-              <Link to="/register">{headerContent.register}</Link>
-            </BaseButton>
-          </div>
-        )}
-      </>
+          <BaseButton isOutlined>
+            <Link to="/register">{headerContent.register}</Link>
+          </BaseButton>
+        </div>
+      )}
     </header>
   );
 };

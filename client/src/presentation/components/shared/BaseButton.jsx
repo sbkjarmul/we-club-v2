@@ -1,6 +1,12 @@
 import PropTypes from "prop-types";
 
-const BaseButton = ({ isOutlined, isBorderless, children, ...props }) => {
+const BaseButton = ({
+  isOutlined,
+  isBorderless,
+  children,
+  className,
+  ...props
+}) => {
   return (
     <button
       className={`
@@ -8,6 +14,7 @@ const BaseButton = ({ isOutlined, isBorderless, children, ...props }) => {
       ${isOutlined && "border border-cyan-500 bg-transparent text-cyan-500"}
       ${isBorderless && "bg-transparent border-0 text-cyan-500"}
       ${!isOutlined && !isBorderless && "text-white"}
+      ${className}
       `}
       {...props}
     >
@@ -21,6 +28,7 @@ BaseButton.propTypes = {
   type: PropTypes.string,
   isOutlined: PropTypes.bool,
   isBorderless: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default BaseButton;

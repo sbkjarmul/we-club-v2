@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Chat from "@/presentation/pages/chat/Chat";
 import Login from "@/presentation/pages/auth/Login";
 import Register from "@/presentation/pages/auth/Register";
-import Header from "@/presentation/components/blocks/Header";
+import Header from "@/presentation/components/blocks/header";
 import BaseLoader from "@/presentation/components/shared/BaseLoader";
 import Main from "./pages/main/Main";
 
