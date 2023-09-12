@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div className="h-full grid grid-rows-[75px_auto]">
-      <Header userInfo={userInfo} />
+      <Header />
       <div className="p-4 row-span-5">
         <Routes>
           <Route

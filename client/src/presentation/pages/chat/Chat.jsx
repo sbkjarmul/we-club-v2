@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ChatBox from "@/presentation/components/chat/ChatBox";
 import ChatUsersList from "@/presentation/components/chat/ChatUsersList";
 import ChatItemList from "@/presentation/components/chat/ChatItemList";
+import BaseTile from "@/presentation/components/shared/BaseTile";
 // Application Layer
 import {
   getUserChats,
@@ -38,7 +39,6 @@ const Chat = () => {
   console.log("Chat render");
 
   useEffect(() => {
-    // TODO: create mapper for dtos
     dispatch(getUserChats(userInfo.id));
     dispatch(getAllUsers());
   }, []);
@@ -91,26 +91,30 @@ const Chat = () => {
           </div>
         </div>
 
-        <div className="bg-blue-950 grid grid-rows-[150px_1fr_auto] p-3">
-          <div className="p-3 bg-blue-900 rounded-lg overflow-y-auto">
-            <span className="text-blue-200">Users:</span>
-            <ChatUsersList
-              users={otherUsers}
-              createChat={handleCreateChat}
-              isUserOnline={isUserOnline}
-            />
-          </div>
+        <div className="bg-blue-950 grid grid-rows-[150px_1fr_auto] gap-y-3 p-3">
+          <BaseTile
+            header="Friends online:"
+            body={
+              <ChatUsersList
+                users={otherUsers}
+                createChat={handleCreateChat}
+                isUserOnline={isUserOnline}
+              />
+            }
+          />
 
-          <div className="my-3 p-3 bg-blue-900 rounded-lg overflow-y-auto">
-            Chats:
-            <ChatItemList
-              currentUserId={userInfo.id}
-              chats={userChats}
-              isUserOnline={isUserOnline}
-              isChatsLoading={isChatsLoading}
-              openChat={openChat}
-            />
-          </div>
+          <BaseTile
+            header="Chats:"
+            body={
+              <ChatItemList
+                currentUserId={userInfo.id}
+                chats={userChats}
+                isUserOnline={isUserOnline}
+                isChatsLoading={isChatsLoading}
+                openChat={openChat}
+              />
+            }
+          />
 
           <div className="p-3 bg-blue-900 rounded-lg">
             <ChatBox
