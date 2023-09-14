@@ -5,6 +5,7 @@ import ChatBox from "@/presentation/components/chat/ChatBox";
 import ChatUsersList from "@/presentation/components/chat/ChatUsersList";
 import ChatItemList from "@/presentation/components/chat/ChatItemList";
 import BaseTile from "@/presentation/components/shared/BaseTile";
+import GameCanvas from "@/presentation/components/game/GameCanvas";
 // Application Layer
 import {
   getUserChats,
@@ -85,9 +86,10 @@ const Chat = () => {
   return (
     <>
       <div className="grid grid-cols-3 h-full">
-        <div className="col-span-2 bg-blue-900 opacity-80">
-          <div className="flex justify-center items-center h-full">
+        <div className="col-span-2 bg-blue-900">
+          <div className="flex flex-col justify-center items-center h-full">
             <h1 className="text-4xl uppercase">GameBox</h1>
+            <GameCanvas />
           </div>
         </div>
 
