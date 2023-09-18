@@ -32,36 +32,13 @@ class Sprite {
 
   draw(ctx) {
     // Update it if necessary
-    const x = this.gameObject.x;
-    const y = this.gameObject.y;
+    const x = this.gameObject.x - 8;
+    const y = this.gameObject.y - 18;
 
     // Draw the shadow
     // this.isShadowLoaded && ctx.drawImage(this.shadow, 0, 0, 64, 64, x, y, 64, 64);
 
-    this.isLoaded &&
-      ctx.drawImage(
-        this.image,
-        0,
-        0,
-        this.image.width / 4,
-        this.image.width / 4,
-        x - this.image.width / 4,
-        y - this.image.height / 4,
-        this.image.width / 4,
-        this.image.width / 4
-      );
-    // this.isLoaded &&
-    //   ctx.drawImage(
-    //     this.image,
-    //     0,
-    //     0,
-    //     this.image.width / 4,
-    //     this.image.height / 4,
-    //     x - this.image.width / 4 / 2,
-    //     y - this.image.height / 4,
-    //     this.image.width / 8,
-    //     this.image.height / 8
-    //   );
+    this.isLoaded && ctx.drawImage(this.image, 0, 0, 32, 32, x, y, 32, 32);
   }
 }
 
