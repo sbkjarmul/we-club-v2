@@ -1,4 +1,5 @@
 import GameObject from "./GameObject";
+import { DIRECTIONS } from "./constants";
 import utils from "./utils";
 
 class Person extends GameObject {
@@ -7,6 +8,8 @@ class Person extends GameObject {
     this.movingProgressRemaining = utils.withGrid(0);
 
     this.isPlayerControlled = config.isPlayerControlled || false;
+
+    this.direction = DIRECTIONS.DOWN;
 
     this.directionUpdate = {
       UP: ["y", -1],
@@ -18,6 +21,7 @@ class Person extends GameObject {
 
   update(state) {
     this.updatePosition();
+    this.updateSprite(state);
 
     if (this.movingProgressRemaining === 0 && state.arrow) {
       this.direction = state.arrow;
@@ -30,6 +34,22 @@ class Person extends GameObject {
       const [property, change] = this.directionUpdate[this.direction];
       this[property] += change;
       this.movingProgressRemaining -= 1;
+    }
+  }
+
+  updateSprite(state) {
+    if (
+      this.isPlayerControlled &&
+      this.movingProgressRemaining > 0 &&
+      !state.arrow
+    ) {
+      this.sprite.setAnimation("IDLE-" + this.direction);
+      return;
+    }
+
+    if (this.isPlayerControlled && this.movingProgressRemaining > 0) {
+      this.sprite.setAnimation("WALK-" + this.direction);
+      return;
     }
   }
 }

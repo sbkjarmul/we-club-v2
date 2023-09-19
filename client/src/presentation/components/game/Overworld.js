@@ -11,14 +11,18 @@ class Overworld {
   startGameLoop() {
     const step = () => {
       this.clearCanvas();
+
+      // Establish the camera person
+      const cameraPerson = this.map.gameObjects.hero;
+
       // Draw lower layer
-      this.map.drawLowerImage(this.ctx);
+      this.map.drawLowerImage(this.ctx, cameraPerson);
 
       // Draw crew
-      this.drawGameObjects();
+      this.drawGameObjects(cameraPerson);
 
       // Draw upper layer
-      this.map.drawUpperImage(this.ctx);
+      this.map.drawUpperImage(this.ctx, cameraPerson);
 
       requestAnimationFrame(() => {
         step();
@@ -37,12 +41,14 @@ class Overworld {
     this.startGameLoop();
   }
 
-  drawGameObjects() {
+  drawGameObjects(cameraPerson) {
     Object.values(this.map.gameObjects).forEach((gameObject) => {
       gameObject.update({
         arrow: this.directionInput.direction,
       });
-      gameObject.sprite.draw(this.ctx);
+    });
+    Object.values(this.map.gameObjects).forEach((gameObject) => {
+      gameObject.sprite.draw(this.ctx, cameraPerson);
     });
   }
 

@@ -21,12 +21,21 @@ class OverworldMap {
     this.upperSrc.src = config.upperSrc;
   }
 
-  drawLowerImage(ctx) {
-    ctx.drawImage(this.lowerImage, -200, 0);
+  drawLowerImage(ctx, cameraPerson) {
+    ctx.drawImage(
+      this.lowerImage,
+      utils.withGrid(12) - cameraPerson.x,
+      utils.withGrid(12) - cameraPerson.y
+    );
   }
 
-  drawUpperImage(ctx) {
-    this.upperImage && ctx.drawImage(this.upperImage, 0, 0);
+  drawUpperImage(ctx, cameraPerson) {
+    this.upperImage &&
+      ctx.drawImage(
+        this.upperImage,
+        utils.withGrid(12) - cameraPerson.x,
+        utils.withGrid(12) - cameraPerson.y
+      );
   }
 }
 
@@ -40,11 +49,11 @@ window.OverworldMaps = {
         x: utils.withGrid(5),
         y: utils.withGrid(6),
       }),
-      marcin: new Person({
-        x: utils.withGrid(5),
-        y: utils.withGrid(20),
-        imageSrc: WeMarcin,
-      }),
+      // marcin: new Person({
+      //   x: utils.withGrid(5),
+      //   y: utils.withGrid(20),
+      //   imageSrc: WeMarcin,
+      // }),
 
       radek: new Person({
         x: utils.withGrid(6),
@@ -52,58 +61,58 @@ window.OverworldMaps = {
         imageSrc: WeRadek,
       }),
 
-      sebek: new Person({
-        x: utils.withGrid(7),
-        y: utils.withGrid(20),
-        imageSrc: WeSbk,
-      }),
+      // sebek: new Person({
+      //   x: utils.withGrid(7),
+      //   y: utils.withGrid(20),
+      //   imageSrc: WeSbk,
+      // }),
 
-      cichy: new Person({
-        x: utils.withGrid(8),
-        y: utils.withGrid(20),
-        imageSrc: WeCichy,
-      }),
+      // cichy: new Person({
+      //   x: utils.withGrid(8),
+      //   y: utils.withGrid(20),
+      //   imageSrc: WeCichy,
+      // }),
 
-      ozia: new Person({
-        x: utils.withGrid(9),
-        y: utils.withGrid(20),
-        imageSrc: WeOzia,
-      }),
+      // ozia: new Person({
+      //   x: utils.withGrid(9),
+      //   y: utils.withGrid(20),
+      //   imageSrc: WeOzia,
+      // }),
 
-      rafcio: new Person({
-        x: utils.withGrid(10),
-        y: utils.withGrid(20),
-      }),
+      // rafcio: new Person({
+      //   x: utils.withGrid(10),
+      //   y: utils.withGrid(20),
+      // }),
 
-      krycha: new Person({
-        x: utils.withGrid(11),
-        y: utils.withGrid(20),
-        imageSrc: WeKrycha,
-      }),
+      // krycha: new Person({
+      //   x: utils.withGrid(11),
+      //   y: utils.withGrid(20),
+      //   imageSrc: WeKrycha,
+      // }),
 
-      mati: new Person({
-        x: utils.withGrid(12),
-        y: utils.withGrid(20),
-        imageSrc: WeMati,
-      }),
+      // mati: new Person({
+      //   x: utils.withGrid(12),
+      //   y: utils.withGrid(20),
+      //   imageSrc: WeMati,
+      // }),
 
-      piter: new Person({
-        x: utils.withGrid(13),
-        y: utils.withGrid(20),
-        imageSrc: WePiter,
-      }),
+      // piter: new Person({
+      //   x: utils.withGrid(13),
+      //   y: utils.withGrid(20),
+      //   imageSrc: WePiter,
+      // }),
 
-      zabek: new Person({
-        x: utils.withGrid(14),
-        y: utils.withGrid(20),
-        imageSrc: WeZabek,
-      }),
+      // zabek: new Person({
+      //   x: utils.withGrid(14),
+      //   y: utils.withGrid(20),
+      //   imageSrc: WeZabek,
+      // }),
 
-      suchy: new Person({
-        x: utils.withGrid(15),
-        y: utils.withGrid(20),
-        imageSrc: WeSuchy,
-      }),
+      // suchy: new Person({
+      //   x: utils.withGrid(15),
+      //   y: utils.withGrid(20),
+      //   imageSrc: WeSuchy,
+      // }),
     },
   },
 };
